@@ -1,4 +1,3 @@
-let x = 1
 function request(url, data, config = {}) {
 	return new Promise((resolve, reject) => {
 		uni.request({

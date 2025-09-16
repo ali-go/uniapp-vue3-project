@@ -1,49 +1,52 @@
 <template>
-  <view class="content">
-    <image class="logo" src="/static/logo.png"></image>
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
-			<uni-badge text="1"></uni-badge>
-    </view>
-  </view>
+	<view class="page-container">
+		<CustomNavbar>
+			<view class="navbar-text">跨境E路通</view>
+		</CustomNavbar>
+		<view class="top-box">
+			<button>注册/登录</button>
+			<image src="" mode="scaleToFill" />
+		</view>
+	</view>
 </template>
 
 <script>
+import CustomNavbar from '@/components/CustomNavbar.vue'
+
 export default {
-  data() {
-    return {
-      title: 'Hello',
-    }
-  },
-  onLoad() {},
-  methods: {},
+	components: {
+		CustomNavbar
+	},
+	data() {
+		return {}
+	},
+	onLoad() {},
+	methods: {}
 }
 </script>
 
-<style>
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+<style scoped lang="scss">
+.navbar-text {
+	padding-left: 36rpx;
+	text-align: left;
+	font-family:
+		PingFangSC,
+		PingFang SC;
+	font-weight: 500;
+	font-size: 34rpx;
+	color: #323233;
 }
 
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
-}
+.top-box {
+	margin-top: 14rpx;
 
-.text-area {
-  display: flex;
-  justify-content: center;
-}
+	button {
+	}
 
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
+	image {
+		width: 72rpx;
+		height: 72rpx;
+		background: #cbc6ff;
+	}
 }
 </style>
