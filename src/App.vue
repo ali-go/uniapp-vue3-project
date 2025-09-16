@@ -2,7 +2,6 @@
 import { checkForUpdate } from './utils/checkForUpdate'
 import { getTestData } from './api/test'
 
-let x = 1
 export default {
 	onLaunch: function () {
 		checkForUpdate() // 检测小程序是否更新

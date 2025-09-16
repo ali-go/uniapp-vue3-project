@@ -1,6 +1,10 @@
 {
-  "name": "uni-preset-vue",
+  "name": "跨境E路通",
   "version": "0.0.0",
+  "packageManager": "pnpm@10.16.1",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev:custom": "uni -p",
     "dev:h5": "uni",
@@ -33,7 +37,8 @@
     "build:mp-xhs": "uni build -p mp-xhs",
     "build:quickapp-webview": "uni build -p quickapp-webview",
     "build:quickapp-webview-huawei": "uni build -p quickapp-webview-huawei",
-    "build:quickapp-webview-union": "uni build -p quickapp-webview-union"
+    "build:quickapp-webview-union": "uni build -p quickapp-webview-union",
+    "lint": "npx eslint src --ext .js,.vue"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-4070620250821001",

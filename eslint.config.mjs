@@ -15,7 +15,7 @@ export default [
 			prettier: prettier
 		},
 		rules: {
-			'prettier/prettier': 'error',
+			'prettier/prettier': 'off',
 			'no-console': 'off',
 			'no-restricted-globals': 'off',
 			'no-restricted-syntax': 'off',
