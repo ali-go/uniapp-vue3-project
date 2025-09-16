@@ -1,15 +1,18 @@
 <script>
+import { checkForUpdate } from "./utils/checkForUpdate";
+
 export default {
   onLaunch: function () {
-    console.log('App Launch')
+    checkForUpdate(); // 检测小程序是否更新
+    console.log("App Launch");
   },
   onShow: function () {
-    console.log('App Show')
+    console.log("App Show");
   },
   onHide: function () {
-    console.log('App Hide')
+    console.log("App Hide");
   },
-}
+};
 </script>
 
 <style>
