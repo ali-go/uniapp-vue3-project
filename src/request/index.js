@@ -1,7 +1,7 @@
 function request(url, data, config = {}) {
   return new Promise((resolve, reject) => {
     uni.request({
-      url: `${process.env.VUE_APP_BASE_URL}${url}`,
+      url: `${import.meta.env.VITE_BASE_URL}${url}`,
       data,
       method: 'POST',
       success: function (res) {
