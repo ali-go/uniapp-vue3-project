@@ -8,6 +8,9 @@
 	"pages": [
 		{
 			"path": "pages/index/index"
+		},
+		{
+			"path": "pages/mine/index"
 		}
 	],
 	"globalStyle": {

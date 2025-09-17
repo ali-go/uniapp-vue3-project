@@ -16,9 +16,9 @@ export default {
 		console.log('App Hide')
 	},
 	globalData: {
-		statusBarHeight: 0, // 状态栏高度
+		statusBarHeight: 44, // 状态栏高度
 		menuButtonHeight: 32, // 胶囊按钮高度
-		navigationBarHeight: 0, // 导航栏高度
+		navigationBarHeight: 40 // 导航栏高度
 	}
 }
 </script>
