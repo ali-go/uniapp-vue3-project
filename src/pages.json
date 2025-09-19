@@ -13,6 +13,22 @@
 			"path": "pages/mine/index"
 		}
 	],
+	"subPackages": [
+		{
+			"root": "packageLogin/",
+			"pages": [
+				{
+					"path": "pages/index/index"
+				},
+				{
+					"path": "pages/other-phone/index"
+				},
+				{
+					"path": "pages/register/index"
+				}
+			]
+		}
+	],
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"backgroundColor": "#F8F8F8"

@@ -1,6 +1,6 @@
 <template>
 	<view class="page-container">
-		<CustomNavbar>
+		<CustomNavbar :isBack="false">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">跨境E路通</view>
 			</template>
@@ -94,7 +94,7 @@ export default {
 	font-family:
 		PingFangSC,
 		PingFang SC;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 34rpx;
 	color: #323233;
 }
@@ -131,30 +131,32 @@ export default {
 .product-wrapper {
 	> .title {
 		margin-bottom: 26rpx;
+
+		&::after {
+			content: '';
+			display: inline-block;
+			width: 76rpx;
+			height: 28rpx;
+			background: linear-gradient(90deg, rgba(255, 246, 246, 0) 0%, #b085ff 64%, #555cff 100%);
+			border-radius: 0rpx 8rpx 16rpx 0rpx;
+			opacity: 0.49;
+			position: relative;
+			top: 18rpx;
+			left: -48rpx;
+			z-index: 2;
+		}
 	}
 
 	> .title text {
 		font-family:
 			PingFangSC,
 			PingFang SC;
-		font-weight: 500;
+		font-weight: 600;
 		font-size: 32rpx;
 		color: #323233;
 		line-height: 44rpx;
 		position: relative;
-
-		&::after {
-			content: '';
-			display: block;
-			width: 76rpx;
-			height: 28rpx;
-			background: linear-gradient(90deg, rgba(255, 246, 246, 0) 0%, #b085ff 64%, #555cff 100%);
-			border-radius: 0rpx 8rpx 16rpx 0rpx;
-			opacity: 0.49;
-			position: absolute;
-			bottom: -2rpx;
-			right: -24rpx;
-		}
+		z-index: 4;
 	}
 }
 

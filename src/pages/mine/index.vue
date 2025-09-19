@@ -1,6 +1,6 @@
 <template>
 	<div class="page-container">
-		<CustomNavbar>
+		<CustomNavbar :isBack="false">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">客户中心</view>
 			</template>
@@ -81,7 +81,7 @@ export default {
 <style lang="scss" scoped>
 .navbar-text {
 	font-family: SFProDisplay, SFProDisplay;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 34rpx;
 	color: #000000;
 }
@@ -255,8 +255,8 @@ export default {
 		}
 
 		.click-area {
-			width: 40rpx;
-			height: 40rpx;
+			width: 42rpx;
+			height: 42rpx;
 			display: flex;
 			align-items: center;
 			justify-content: center;

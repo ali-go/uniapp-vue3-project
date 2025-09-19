@@ -7,7 +7,9 @@ import prettierConfig from '@vue/eslint-config-prettier'
 export default [
 	{
 		files: ['**/*.{js,mjs,cjs,vue}'],
-		languageOptions: { globals: { ...globals.browser, uni: true, wx: true, getApp: true } }
+		languageOptions: {
+			globals: { ...globals.browser, uni: true, wx: true, getApp: true, getCurrentPages: true }
+		}
 	},
 	pluginJs.configs.recommended,
 	...pluginVue.configs['flat/essential'],

@@ -1,12 +1,11 @@
 <script>
-import { checkForUpdate } from './utils/checkForUpdate'
-import { getNavHeight } from './utils/getNavHeight'
+import { checkForUpdate, getNavigationBarHeight } from './utils/wx'
 import './styles/reset.css'
 
 export default {
 	onLaunch: function () {
 		checkForUpdate() // 检测小程序是否更新
-		getNavHeight() // 获取 navigationBarHeight 等
+		getNavigationBarHeight() // 获取 navigationBarHeight 等
 		console.log('App Launch')
 	},
 	onShow: function () {
