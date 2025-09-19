@@ -50,7 +50,7 @@
 <script>
 import CustomNavbar from '@/components/CustomNavbar.vue'
 import { navigateBack } from '@/utils/wx'
-import { phoneNumberRegExp } from '@/utils/regExp'
+import { phoneNumberRegExp } from '@/packageLogin/utils/regExp'
 
 export default {
 	components: {

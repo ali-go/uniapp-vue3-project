@@ -1,22 +1,24 @@
 <template>
 	<view class="page-container">
-		<CustomNavbar :isBack="false">
-			<template v-slot="{ navigationBarHeight }">
-				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">跨境E路通</view>
-			</template>
-		</CustomNavbar>
-		<view class="top-box">
-			<button>注册/登录</button>
-			<image src="" mode="scaleToFill" />
-		</view>
-		<view class="channels-wrapper">
-			<view class="title"> <text>网上营业厅</text> </view>
-			<view class="channel-items">
-				<view v-for="(channel, index) in channelItems" class="channel-item" :key="index">
-					<view :style="{ background: channel.background }" class="icon-box">
-						<image src="" mode="scaleToFill" />
+		<view class="bg-wrapper" style="background-image: url(../../static/images/index/image.png)">
+			<CustomNavbar :isBack="false">
+				<template v-slot="{ navigationBarHeight }">
+					<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">跨境E路通</view>
+				</template>
+			</CustomNavbar>
+			<view class="top-box">
+				<button>注册/登录</button>
+				<image src="" mode="scaleToFill" />
+			</view>
+			<view class="channels-wrapper">
+				<view class="title"> <text>网上营业厅</text> </view>
+				<view class="channel-items">
+					<view v-for="(channel, index) in channelItems" class="channel-item" :key="index">
+						<view :style="{ background: channel.background }" class="icon-box">
+							<image src="" mode="scaleToFill" />
+						</view>
+						<text>{{ channel.title }}</text>
 					</view>
-					<text>{{ channel.title }}</text>
 				</view>
 			</view>
 		</view>
@@ -88,6 +90,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.page-container {
+	background: linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%);
+}
+
+.bg-wrapper {
+	background-repeat: no-repeat;
+	background-size: 100% 616rpx;
+}
+
 .navbar-text {
 	padding-left: 36rpx;
 	text-align: left;
@@ -184,7 +195,6 @@ export default {
 				margin-bottom: 16rpx;
 				box-shadow: 0rpx 24rpx 24rpx -24rpx rgba(0, 0, 0, 0.2);
 				border-radius: 32rpx;
-				border: 1rpx solid;
 				border-image: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.45)) 1 1;
 				display: flex;
 				align-items: center;

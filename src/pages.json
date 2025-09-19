@@ -27,6 +27,14 @@
 					"path": "pages/register/index"
 				}
 			]
+		},
+		{
+			"root": "packageExchange/",
+			"pages": [
+				{
+					"path": "pages/index/index"
+				}
+			]
 		}
 	],
 	"globalStyle": {

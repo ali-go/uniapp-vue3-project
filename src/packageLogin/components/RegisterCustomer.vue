@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { phoneNumberRegExp, IDNumberRegExp } from '@/utils/regExp'
+import { phoneNumberRegExp, IDNumberRegExp } from '../utils/regExp'
 
 export default {
 	computed: {
