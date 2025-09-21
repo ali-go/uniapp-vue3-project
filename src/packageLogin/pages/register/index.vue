@@ -5,39 +5,38 @@
 				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">用户注册</view>
 			</template>
 		</CustomNavbar>
-		<view class="tab-wrapper">
-			<view class="tab-items">
-				<view class="tab-item" :class="{ 'tab-active': activeName === '1' }">
-					<view class="title"><text>企业用户注册</text></view>
+		<view class="page-content">
+			<view class="tab-wrapper">
+				<view class="tab-items">
+					<view class="tab-item-wrapper" :class="activeName === '1' ? 'tab-active' : 'tab-inactive'">
+						<view class="tab-item">
+							<view class="title"><text>企业用户注册</text></view>
+						</view>
+					</view>
+					<view class="tab-item-wrapper" :class="activeName === '2' ? 'tab-active' : 'tab-inactive'">
+						<view class="tab-item">
+							<view class="title"><text>个人用户注册</text></view>
+						</view>
+					</view>
 				</view>
-				<view class="tab-item" :class="{ 'tab-active': activeName === '2' }">
-					<view class="title"><text>个人用户注册</text></view>
+				<view class="register-form-wrapper">
+					<template v-if="activeName === '1'">
+						<RegisterCompany ref="companyRef" />
+					</template>
+					<template v-else>
+						<RegisterCustomer ref="customerRef" />
+					</template>
 				</view>
+				<view class="protocol-box">
+					<uni-data-checkbox v-model="checked" selectedColor="#3264ed" multiple
+						:localdata="protocol"></uni-data-checkbox>
+					<view>我已阅读并接受<navigator url="/pages/protocol/data" open-type="navigate"><text>《用户协议》</text>
+						</navigator>
+						<navigator url="/pages/protocol/privacy" open-type="navigate"><text>《用户隐私政策》</text></navigator>
+					</view>
+				</view>
+				<button class="btn-submit" @click="handleSubmit">立即开通</button>
 			</view>
-			<view class="register-form-wrapper">
-				<template v-if="activeName === '1'">
-					<RegisterCompany ref="companyRef" />
-				</template>
-				<template v-else>
-					<RegisterCustomer ref="customerRef" />
-				</template>
-			</view>
-			<view class="protocol-box">
-				<uni-data-checkbox
-					v-model="checked"
-					selectedColor="#3264ed"
-					multiple
-					:localdata="protocol"
-				></uni-data-checkbox>
-				<view
-					>我已阅读并接受<navigator url="/pages/protocol/data" open-type="navigate"
-						><text>《用户协议》</text></navigator
-					><navigator url="/pages/protocol/privacy" open-type="navigate"
-						><text>《用户隐私政策》</text></navigator
-					></view
-				>
-			</view>
-			<button class="btn-submit" @click="handleSubmit">立即开通</button>
 		</view>
 	</div>
 </template>
@@ -56,7 +55,7 @@ export default {
 	},
 	data() {
 		return {
-			activeName: '2', // tab 绑定值 1 企业；2 个人
+			activeName: '1', // tab 绑定值 1 企业；2 个人
 			checked: '', // 协议勾选
 			protocol: [{ text: '', value: '1' }] // 协议勾选
 		}
@@ -95,6 +94,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page-container {
+	position: relative;
+
+	&::after {
+		content: '';
+		width: 100%;
+		height: 616rpx;
+		border: 128rpx solid;
+		opacity: 0.31;
+		border-image: linear-gradient(90deg, rgba(18, 121, 255, 1), rgba(128, 43, 255, 1)) 128 128;
+		filter: blur(75.5px);
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
+
 .navbar-text {
 	font-family:
 		PingFangSC,
@@ -105,17 +121,107 @@ export default {
 	margin-bottom: 32rpx;
 }
 
+.page-content {
+	position: relative;
+
+	&::after {
+		content: '';
+		width: 100%;
+		height: calc(100vh - 208rpx);
+		background: #FFFFFF;
+		border: 2rpx solid #FFFFFF;
+		opacity: 0.6;
+		backdrop-filter: blur(12px);
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 2;
+	}
+}
+
 .tab-wrapper {
+	border-radius: 16rpx 16rpx 0rpx 0rpx;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 4;
+
 	.tab-items {
 		display: flex;
-		margin-bottom: 54rpx;
+		margin-bottom: 22rpx;
+
+		.tab-item-wrapper {
+			flex: 1;
+			position: relative;
+			display: flex;
+			height: 120rpx;
+
+			&.tab-active {
+				.tab-item {
+					.title {
+						text {
+							height: 40rpx;
+							font-weight: 600;
+							color: #323233;
+							line-height: 40rpx;
+							position: relative;
+							z-index: 4;
+						}
+
+						&::after {
+							content: '';
+							display: inline-block;
+							width: 76rpx;
+							height: 28rpx;
+							background: linear-gradient(90deg, rgba(255, 246, 246, 0) 0%, #b085ff 64%, #555cff 100%);
+							border-radius: 0rpx 8rpx 16rpx 0rpx;
+							opacity: 0.49;
+							position: relative;
+							top: 14rpx;
+							left: -48rpx;
+							z-index: 2;
+						}
+					}
+
+					&::before,
+					&::after {
+						content: '';
+						width: 44rpx;
+						height: 88rpx;
+						// background-color: ;
+						position: absolute;
+						bottom: 0;
+
+					}
+				}
+
+				&::after {
+					content: none;
+				}
+			}
+
+			&::after {
+				content: '';
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(180deg, #A18AFF 0%, #73A4FF 100%);
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 2;
+			}
+		}
 
 		.tab-item {
-			flex: 1;
+			width: 100%;
 			height: 88rpx;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 4;
 
 			.title {
 				text {
@@ -127,31 +233,6 @@ export default {
 					font-size: 30rpx;
 					color: #ffffff;
 					line-height: 44rpx;
-				}
-			}
-
-			&.tab-active .title {
-				text {
-					height: 40rpx;
-					font-weight: 600;
-					color: #323233;
-					line-height: 40rpx;
-					position: relative;
-					z-index: 4;
-				}
-
-				&::after {
-					content: '';
-					display: inline-block;
-					width: 76rpx;
-					height: 28rpx;
-					background: linear-gradient(90deg, rgba(255, 246, 246, 0) 0%, #b085ff 64%, #555cff 100%);
-					border-radius: 0rpx 8rpx 16rpx 0rpx;
-					opacity: 0.49;
-					position: relative;
-					top: 14rpx;
-					left: -48rpx;
-					z-index: 2;
 				}
 			}
 		}
@@ -202,7 +283,7 @@ export default {
 			display: none;
 		}
 
-		.is-required + text {
+		.is-required+text {
 			display: flex;
 			align-items: center;
 
