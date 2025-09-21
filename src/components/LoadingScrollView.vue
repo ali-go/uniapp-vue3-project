@@ -2,7 +2,7 @@
 	<scroll-view
 		:style="{ height: scrollHeight }"
 		:scroll-y="scrollY"
-		@scrolltolower="handleScrolltolower"
+		@scrolltolower="handleScrollToLower"
 	>
 		<slot></slot>
 		<uni-load-more v-if="showLoadMore" :status="loadStatus" />
@@ -38,7 +38,7 @@ export default {
 	mounted() {},
 	methods: {
 		// 滚动触底：可以根据需要自行补充需要的钩子
-		handleScrolltolower() {
+		handleScrollToLower() {
 			console.log('触底')
 			// 无加载更多模块时
 			if (!this.showLoadMore) return
