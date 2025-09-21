@@ -6,26 +6,16 @@
 			</template>
 		</CustomNavbar>
 		<ProductChoose></ProductChoose>
-		<view class="order-filter">
-			<view class="order-tool">
-				<image src="" mode="scaleToFill" />
-				<image src="" mode="scaleToFill" />
-				<text class="tool-text">时间排序</text>
-			</view>
-			<view class="filter-tool">
-				<image src="" mode="scaleToFill" />
-				<text class="tool-text">筛选条件</text>
-			</view>
-		</view>
 		<!-- 回头根据不同产品渲染不同的index -->
-		<YtkIndex class="module-content"></YtkIndex>
+		<!-- <YtkIndex class="module-content"></YtkIndex> -->
+		<view class="module-content">这是交易查询页面</view>
 		<TabBar></TabBar>
 	</view>
 </template>
 
 <script>
 import CustomNavbar from '@/components/CustomNavbar'
-import YtkIndex from '../ytk/index'
+// import YtkIndex from '../ytk/index'
 import TabBar from '../../components/tab-bar'
 import ProductChoose from '../../components/product-choose'
 // import { navigateBack } from '@/utils/wx'
@@ -34,7 +24,7 @@ export default {
 	components: {
 		CustomNavbar,
 		ProductChoose,
-		YtkIndex,
+		// YtkIndex,
 		TabBar
 	},
 	data() {
@@ -64,29 +54,6 @@ export default {
 	font-weight: 600;
 	font-size: 34rpx;
 	color: #000000;
-}
-.order-filter {
-	height: 96rpx;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0 40rpx;
-	border-top: 1rpx solid #ebedf0;
-	.tool-text {
-		font-size: 28rpx;
-		color: #646566;
-		margin-left: 10rpx;
-	}
-	image {
-		width: 16rpx;
-		height: 16rpx;
-		background: #ccc;
-		margin-left: 4rpx;
-	}
-	.order-tool {
-	}
-	.filter-tool {
-	}
 }
 .module-content {
 	box-sizing: border-box;
