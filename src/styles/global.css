@@ -1,0 +1,15 @@
+page {
+	--text-success-color: green;
+	--text-warning-color: yellow;
+	--text-fail-color: red;
+}
+
+.success-text {
+	color: var(--text-success-color);
+}
+.warning-text {
+	color: var(--text-warning-color);
+}
+.fail-text {
+	color: var(--text-fail-color);
+}

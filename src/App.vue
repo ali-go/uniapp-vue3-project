@@ -1,6 +1,5 @@
 <script>
 import { checkForUpdate, getNavigationBarHeight } from './utils/wx'
-import './styles/reset.css'
 
 export default {
 	onLaunch: function () {
@@ -24,4 +23,6 @@ export default {
 
 <style>
 /*每个页面公共css */
+@import './styles/reset.css';
+@import './styles/global.css';
 </style>

@@ -35,10 +35,19 @@
 					"path": "pages/index/index"
 				}
 			]
+		},
+		{
+			"root": "packageCrossBorderE/",
+			"pages": [
+				{
+					"path": "pages/index/index"
+				}
+			]
 		}
 	],
 	"globalStyle": {
 		"navigationStyle": "custom",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"navigationBarTextStyle": "black"
 	}
 }
