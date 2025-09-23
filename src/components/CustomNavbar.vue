@@ -1,8 +1,8 @@
 <template>
-	<view class="custom-navbar" :style="{ height: navigationBarHeight, paddingTop: statusBarHeight }">
+	<view class="custom-navbar" :style="{ height: fixedBarHeight }">
 		<view
 			class="fixed-navigation-bar"
-			:style="{ height: navigationBarHeight, top: statusBarHeight }"
+			:style="{ height: fixedBarHeight, paddingTop: statusBarHeight }"
 		>
 			<template v-if="isBack">
 				<slot name="prefix">
@@ -32,7 +32,8 @@ export default {
 	data() {
 		return {
 			statusBarHeight: `${getApp().globalData.statusBarHeight}px`, // 状态栏高度
-			navigationBarHeight: `${getApp().globalData.navigationBarHeight}px` // 导航栏高度
+			navigationBarHeight: `${getApp().globalData.navigationBarHeight}px`, // 导航栏高度
+			fixedBarHeight: `${getApp().globalData.statusBarHeight + getApp().globalData.navigationBarHeight}px` // 固定栏的高度
 		}
 	},
 	onLoad() {},
@@ -53,7 +54,7 @@ export default {
 
 	.click-area {
 		position: absolute;
-		top: 0;
+		bottom: 0;
 		left: 0;
 		display: flex;
 		align-items: center;
@@ -69,8 +70,8 @@ export default {
 .fixed-navigation-bar {
 	width: 100%;
 	text-align: center;
-	box-sizing: content-box;
 	position: fixed;
+	top: 0;
 	left: 0;
 	z-index: 999;
 }

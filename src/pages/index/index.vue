@@ -106,7 +106,7 @@ export default {
 					title: '更多',
 					imageWidth: '44rpx',
 					imageHeight: '44rpx',
-					path: '/packageExchange/pages/more/index'
+					path: '/packageHome/pages/more/index'
 				}
 			], // 业务大厅
 			activeItem: 0, // 当前选中项
@@ -141,7 +141,7 @@ export default {
 		 */
 		handleDigitalClick() {
 			uni.navigateTo({
-				url: '/packageExchange/pages/digital/index'
+				url: '/packageHome/pages/digital/index'
 			})
 		}
 	}
