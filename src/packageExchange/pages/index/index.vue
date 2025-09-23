@@ -26,7 +26,7 @@ import lEchart from '../../uni_modules/lime-echart/components/l-echart/l-echart.
 
 export default {
 	components: {
-		lEchart,
+		lEchart
 	},
 	data() {
 		return {
@@ -56,7 +56,9 @@ export default {
 					// formatter: (params, ticket, callback) => {}
 				},
 				legend: {
-					data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+					data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎'],
+					right: 10,
+					top: 10
 				},
 				grid: {
 					left: '3%',

@@ -1,25 +1,25 @@
 <template>
-	<div class="page-container">
+	<div class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
 		<CustomNavbar :isBack="false">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">客户中心</view>
 			</template>
 		</CustomNavbar>
 		<view class="login-wrapper">
-			<view class="top-right" :class="{ 'logout-box': isLogin }">
+			<view class="top-right" :class="{ 'login-box': isLogin }">
 				<template v-if="isLogin">
-					<view class="logout">
-						<image :src="logout_url" mode="scaleToFill" />
+					<view class="login">
+						<image src="@static/images/mine/logout.png" mode="scaleToFill" />
 						退出登录
 					</view>
 				</template>
-				<template v-else> 未登录 </template>
+				<template v-else> <text class="not-login-text">未登录</text> </template>
 			</view>
-			<image class="logo" src="" mode="scaleToFill" />
-			<view class="login-box">
+			<image class="logo" src="@static/images/mine/bank-logo.png" mode="scaleToFill" />
+			<view class="user-box">
 				<view class="outer">
 					<view class="inner">
-						<image src="" mode="scaleToFill" />
+						<image src="@static/images/mine/avatar.png" mode="scaleToFill" />
 					</view>
 				</view>
 				<view class="vertical-bar"></view>
@@ -36,10 +36,10 @@
 		</view>
 		<view class="items">
 			<view v-for="(item, index) in items" :key="index" class="item">
-				<image class="icon" src="" mode="scaleToFill" />
+				<image class="icon" :src="item.image" mode="scaleToFill" />
 				<text class="title">{{ item.title }}</text>
 				<view class="click-area">
-					<image src="" mode="scaleToFill" />
+					<image src="@static/images/public/forward.png" mode="scaleToFill" />
 				</view>
 			</view>
 		</view>
@@ -48,7 +48,7 @@
 
 <script>
 import CustomNavbar from '@/components/CustomNavbar.vue'
-import logout_url from '@/static/images/mine/logout.png'
+import bg_url from '@/static/images/mine/bg.png'
 
 export default {
 	components: {
@@ -62,13 +62,15 @@ export default {
 	data() {
 		return {
 			isLogin: true, // 是否登录
-			logout_url,
+			bg_url,
 			items: [
 				{
-					title: '用户协议'
+					title: '用户协议',
+					image: '../../static/images/mine/user-data.png'
 				},
 				{
-					title: '用户隐私政策'
+					title: '用户隐私政策',
+					image: '../../static/images/mine/privacy.png'
 				}
 			],
 			nickname: '冷雨薇冷雨薇冷雨薇冷雨薇冷雨薇冷雨薇', // 昵称
@@ -79,6 +81,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page-container {
+	background-size: cover;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
 .navbar-text {
 	font-family: SFProDisplay, SFProDisplay;
 	font-weight: 600;
@@ -88,7 +96,7 @@ export default {
 
 .login-wrapper {
 	width: 686rpx;
-	margin: 0 auto;
+	margin: 408rpx auto 0;
 	padding: 82rpx 0 82rpx 36rpx;
 	background: linear-gradient(#64abec 0%, #7982ff 100%), #ffffff;
 	border-radius: 32rpx;
@@ -115,7 +123,7 @@ export default {
 		right: 0;
 		z-index: 10;
 
-		.logout {
+		.login {
 			display: flex;
 			align-items: center;
 
@@ -126,7 +134,11 @@ export default {
 			}
 		}
 
-		&.logout-box {
+		.not-login-text {
+			opacity: 0.6;
+		}
+
+		&.login-box {
 			padding: 0 28rpx;
 			text-shadow: none;
 		}
@@ -135,15 +147,13 @@ export default {
 	.logo {
 		width: 244rpx;
 		height: 244rpx;
-		background: #ffffff;
-		opacity: 0.08;
 		position: absolute;
 		top: 12rpx;
 		right: 28rpx;
 		z-index: 8;
 	}
 
-	.login-box {
+	.user-box {
 		display: flex;
 		align-items: center;
 
@@ -238,8 +248,8 @@ export default {
 		position: relative;
 
 		.icon {
-			width: 41rpx;
-			height: 36rpx;
+			width: 42rpx;
+			height: 42rpx;
 			margin-right: 22rpx;
 		}
 

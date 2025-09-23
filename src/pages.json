@@ -33,6 +33,9 @@
 			"pages": [
 				{
 					"path": "pages/index/index"
+				},
+				{
+					"path": "pages/more/index"
 				}
 			]
 		},
@@ -48,6 +51,25 @@
 			]
 		}
 	],
+	"tabBar": {
+		"color": "#969799",
+		"selectedColor": "#5271FF",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "业务大厅",
+				"iconPath": "static/images/tab-bar/business.png",
+				"selectedIconPath": "static/images/tab-bar/business-active.png"
+			},
+			{
+				"pagePath": "pages/mine/index",
+				"text": "客户中心",
+				"iconPath": "static/images/tab-bar/mine.png",
+				"selectedIconPath": "static/images/tab-bar/mine-active.png"
+			}
+		]
+	},
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"backgroundColor": "#F8F8F8",

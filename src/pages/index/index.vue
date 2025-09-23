@@ -1,24 +1,56 @@
 <template>
 	<view class="page-container">
-		<view class="bg-wrapper" style="background-image: url(../../static/images/index/image.png)">
-			<CustomNavbar :isBack="false">
-				<template v-slot="{ navigationBarHeight }">
-					<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">跨境E路通</view>
-				</template>
-			</CustomNavbar>
-			<view class="top-box">
-				<button>注册/登录</button>
-				<image src="" mode="scaleToFill" />
+		<CustomNavbar :isBack="false">
+			<template v-slot="{ navigationBarHeight }">
+				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">跨境E路通</view>
+			</template>
+		</CustomNavbar>
+		<view class="top-box">
+			<button>注册/登录</button>
+			<view class="image-box">
+				<!-- <image src="@static/images/index/zh-CN.png" mode="scaleToFill" /> -->
 			</view>
-			<view class="channels-wrapper">
-				<view class="title"> <text>网上营业厅</text> </view>
-				<view class="channel-items">
-					<view v-for="(channel, index) in channelItems" class="channel-item" :key="index">
-						<view :style="{ background: channel.background }" class="icon-box">
-							<image src="" mode="scaleToFill" />
-						</view>
-						<text>{{ channel.title }}</text>
+		</view>
+		<view class="business-wrapper">
+			<view class="title"> <text>业务大厅</text> </view>
+			<view class="business-items">
+				<view v-for="(business, index) in businessItems" class="business-item" :key="index">
+					<view :style="{ background: business.background }" class="icon-box">
+						<image
+							:src="`../../static/images/public/business${index === businessItems.length - 1 ? '-more' : index + 1}.png`"
+							:style="{ width: business.imageWidth, height: business.imageHeight }"
+							mode="scaleToFill"
+						/>
 					</view>
+					<text>{{ business.title }}</text>
+				</view>
+			</view>
+		</view>
+		<view class="information-wrapper">
+			<view class="title"> <text>资讯中心</text> </view>
+			<view class="information-box">
+				<view
+					v-for="(info, index) in infoData"
+					class="image-wrapper"
+					:key="index"
+					v-show="activeItem === index"
+				>
+					<image class="bg-image" :src="info.image" mode="scaleToFill"></image>
+					<view class="box">
+						<view class="title">{{ info.title }}</view>
+						<view class="introduction"
+							><text>{{ info.introduction }}</text
+							><text :decode="true">>></text></view
+						>
+					</view>
+				</view>
+				<view class="indicator-box">
+					<view class="indicator" :class="{ 'is-active': activeItem === 0 }" @click="activeItem = 0"
+						>看汇率</view
+					>
+					<view class="indicator" :class="{ 'is-active': activeItem === 1 }" @click="activeItem = 1"
+						>热门活动</view
+					>
 				</view>
 			</view>
 		</view>
@@ -26,23 +58,23 @@
 			<view class="title"> <text>产品中心</text> </view>
 			<view class="product-box">
 				<view class="left-box box">
-					<view class="title">精选产品</view>
-					<view class="description">多种选择 自选交易</view>
+					<view class="title">数字账户</view>
+					<view class="description">智能跨境提款</view>
 					<button>查看详情</button>
-					<image src="" mode="scaleToFill" />
+					<image src="@static/images/index/digit-account.png" mode="scaleToFill" />
 				</view>
 				<view class="right-box box">
 					<view class="top">
-						<view class="title">精选推荐</view>
-						<view class="description">精选投顾产品</view>
+						<view class="title">小贸通</view>
+						<view class="description">外汇B2B</view>
 						<button>查看详情</button>
-						<image src="" mode="scaleToFill" />
+						<image src="@static/images/index/xmt-logo.png" mode="scaleToFill" />
 					</view>
 					<view class="bottom">
-						<view class="title">金融服务</view>
-						<view class="description">专业顾问一对一</view>
+						<view class="title">稠非通</view>
+						<view class="description">非洲收款</view>
 						<button>查看详情</button>
-						<image src="" mode="scaleToFill" />
+						<image src="@static/images/index/cft-logo.png" mode="scaleToFill" />
 					</view>
 				</view>
 			</view>
@@ -52,6 +84,7 @@
 
 <script>
 import CustomNavbar from '@/components/CustomNavbar.vue'
+import { BUSINESS_ITEMS } from '../../constants'
 
 export default {
 	components: {
@@ -59,29 +92,28 @@ export default {
 	},
 	data() {
 		return {
-			channelItems: [
-				// 网上营业厅
-				{
-					background: `linear-gradient( 321deg, #E0F0FF 0%, #F5FBFF 100%)`,
-					title: '查汇款'
-				},
+			businessItems: [
+				...BUSINESS_ITEMS,
 				{
 					background: `linear-gradient( 315deg, #FEEED7 0%, #FDF9F2 100%)`,
-					title: '汇款路径'
-				},
-				{
-					background: `linear-gradient( 318deg, #E8FEF7 0%, #F0FFFB 100%)`,
-					title: '查电文'
-				},
-				{
-					background: `linear-gradient( 322deg, #FEF9E5 0%, #FEFDFB 100%)`,
-					title: '名录登记'
-				},
-				{
-					background: `linear-gradient( 322deg, #FEF9E5 0%, #FEFDFB 100%)`,
-					title: '跨境E链'
+					title: '更多',
+					imageWidth: '44rpx',
+					imageHeight: '44rpx'
 				}
-			]
+			], // 业务大厅
+			activeItem: 0, // 当前选中项
+			infoData: [
+				{
+					image: '../../static/images/index/exchange.png',
+					title: '全球汇率实时展示',
+					introduction: '一站式快速预览'
+				},
+				{
+					image: '../../static/images/index/event.png',
+					title: '拓新赢好礼',
+					introduction: '全市场甄选好产品'
+				}
+			] // 资讯中心
 		}
 	},
 	onLoad() {},
@@ -91,12 +123,28 @@ export default {
 
 <style scoped lang="scss">
 .page-container {
+	position: relative;
 	background: linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%);
-}
+	padding-bottom: 30rpx;
 
-.bg-wrapper {
-	background-repeat: no-repeat;
-	background-size: 100% 616rpx;
+	:deep(.fixed-navigation-bar) {
+		position: relative;
+		top: 0 !important;
+	}
+
+	&::after {
+		content: '';
+		width: 100%;
+		height: 614rpx;
+		border: 128rpx solid;
+		opacity: 0.31;
+		border-image: linear-gradient(90deg, rgba(18, 121, 255, 1), rgba(128, 43, 255, 1)) 128 128;
+		filter: blur(75.5px);
+		box-sizing: border-box;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 }
 
 .navbar-text {
@@ -131,14 +179,24 @@ export default {
 		color: #f9faff;
 	}
 
-	image {
-		width: 72rpx;
-		height: 72rpx;
-		background: #cbc6ff;
+	.image-box {
+		width: 60rpx;
+		height: 60rpx;
+		// background: #cbc6ff;
+		// display: flex;
+		// align-items: center;
+		// justify-content: center;
+		// border-radius: 50%;
+
+		// image {
+		// 	width: 40rpx;
+		// 	height: 38rpx;
+		// }
 	}
 }
 
-.channels-wrapper,
+.business-wrapper,
+.information-wrapper,
 .product-wrapper {
 	> .title {
 		margin-bottom: 26rpx;
@@ -171,49 +229,115 @@ export default {
 	}
 }
 
-.channels-wrapper {
+.business-wrapper {
 	padding: 0 64rpx;
+}
 
-	.channel-items {
+.information-wrapper {
+	padding: 0 32rpx;
+	margin-bottom: 32rpx;
+
+	> .title {
+		margin-left: 32rpx;
+	}
+
+	.information-box {
+		margin: 0 auto;
+		padding: 12rpx 16rpx 20rpx;
+		width: 686rpx;
+		background: linear-gradient(180deg, #ffffff 0%, #ffffff 45%, #d6eeff 100%);
+		border-radius: 16rpx;
+		border: 2rpx solid #ffffff;
+
+		.image-wrapper {
+			width: 652rpx;
+			height: 220rpx;
+			margin-bottom: 14rpx;
+			border-radius: 16rpx;
+			position: relative;
+		}
+
+		image {
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 2;
+		}
+
+		.box {
+			width: 100%;
+			height: 100%;
+			padding-top: 54rpx;
+			padding-left: 18rpx;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 4;
+		}
+
+		.title {
+			line-height: 56rpx;
+			margin-bottom: 12rpx;
+			font-family: AlibabaPuHuiTi_3_105_Heavy;
+			font-size: 40rpx;
+			color: #3167e7;
+			line-height: 56rpx;
+			font-weight: 600;
+			z-index: 2;
+		}
+
+		.introduction {
+			font-family:
+				PingFangSC,
+				PingFang SC;
+			font-weight: 400;
+			font-size: 24rpx;
+			color: #5b74b0;
+			line-height: 34rpx;
+
+			text + text {
+				margin-left: 24rpx;
+			}
+		}
+	}
+
+	.indicator-box {
 		display: flex;
-		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		width: 420rpx;
+		margin: 0 auto;
 
-		.channel-item {
-			margin-right: 74rpx;
-			margin-bottom: 40rpx;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
+		.indicator {
+			height: 34rpx;
+			font-family:
+				PingFangSC,
+				PingFang SC;
+			font-weight: 400;
+			font-size: 28rpx;
+			color: #323233;
+			line-height: 34rpx;
 
-			&:nth-child(4n) {
-				margin-right: 0;
-			}
+			&.is-active {
+				color: #5271ff;
+				position: relative;
 
-			.icon-box {
-				width: 100rpx;
-				height: 88rpx;
-				margin-bottom: 16rpx;
-				box-shadow: 0rpx 24rpx 24rpx -24rpx rgba(0, 0, 0, 0.2);
-				border-radius: 32rpx;
-				border-image: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.45)) 1 1;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-
-			image {
-				width: 48rpx;
-				height: 44rpx;
-			}
-
-			text {
-				line-height: 34rpx;
-				font-family:
-					PingFangSC,
-					PingFang SC;
-				font-weight: 400;
-				font-size: 24rpx;
-				color: #000000;
+				&::after {
+					content: '';
+					width: 84rpx;
+					height: 2rpx;
+					background: linear-gradient(
+						90deg,
+						rgba(82, 113, 255, 0) 0%,
+						#5271ff 50%,
+						rgba(82, 113, 255, 0) 100%
+					);
+					position: absolute;
+					bottom: -8rpx;
+					left: 0;
+				}
 			}
 		}
 	}
@@ -272,6 +396,7 @@ export default {
 		height: 352rpx;
 		padding-top: 14rpx;
 		padding-left: 32rpx;
+		border-radius: 16rpx;
 		background: linear-gradient(138deg, #f4f8f9 0%, #dee9fc 100%);
 		position: relative;
 
@@ -296,6 +421,7 @@ export default {
 			height: 168rpx;
 			padding-top: 14rpx;
 			padding-left: 24rpx;
+			border-radius: 16rpx;
 			position: relative;
 		}
 
@@ -342,4 +468,8 @@ export default {
 		}
 	}
 }
+</style>
+
+<style lang="scss" scoped>
+@import '../../static/styles/business-items.scss';
 </style>

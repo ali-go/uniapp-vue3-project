@@ -1,18 +1,23 @@
 <template>
-	<view class="custom-navbar" :style="styleObj">
-		<template v-if="isBack">
-			<slot name="prefix">
-				<view
-					class="click-area"
-					@click="handleBack"
-					:style="{ width: styleObj.height, height: styleObj.height }"
-				>
-					<image class="back-icon" src="" mode="scaleToFill" />
-				</view>
-			</slot>
-		</template>
-		<slot :navigationBarHeight="styleObj.height"></slot>
-		<slot name="suffix"></slot>
+	<view class="custom-navbar" :style="{ height: navigationBarHeight, paddingTop: statusBarHeight }">
+		<view
+			class="fixed-navigation-bar"
+			:style="{ height: navigationBarHeight, top: statusBarHeight }"
+		>
+			<template v-if="isBack">
+				<slot name="prefix">
+					<view
+						class="click-area"
+						@click="handleBack"
+						:style="{ width: navigationBarHeight, height: navigationBarHeight }"
+					>
+						<image class="back-icon" src="@static/images/public/back.png" mode="scaleToFill" />
+					</view>
+				</slot>
+			</template>
+			<slot :navigationBarHeight="navigationBarHeight"></slot>
+			<slot name="suffix"></slot>
+		</view>
 	</view>
 </template>
 
@@ -26,10 +31,8 @@ export default {
 	},
 	data() {
 		return {
-			styleObj: {
-				paddingTop: `${getApp().globalData.statusBarHeight}px`, // 状态栏高度
-				height: `${getApp().globalData.navigationBarHeight}px` // 导航栏高度
-			}
+			statusBarHeight: `${getApp().globalData.statusBarHeight}px`, // 状态栏高度
+			navigationBarHeight: `${getApp().globalData.navigationBarHeight}px` // 导航栏高度
 		}
 	},
 	onLoad() {},
@@ -46,8 +49,6 @@ export default {
 
 <style scoped lang="scss">
 .custom-navbar {
-	text-align: center;
-	position: relative;
 	box-sizing: content-box;
 
 	.click-area {
@@ -63,5 +64,14 @@ export default {
 			height: 34rpx;
 		}
 	}
+}
+
+.fixed-navigation-bar {
+	width: 100%;
+	text-align: center;
+	box-sizing: content-box;
+	position: fixed;
+	left: 0;
+	z-index: 999;
 }
 </style>
