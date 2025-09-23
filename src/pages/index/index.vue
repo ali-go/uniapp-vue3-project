@@ -2,7 +2,9 @@
 	<view class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
 		<CustomNavbar :isBack="false">
 			<template v-slot="{ navigationBarHeight }">
-				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">跨境E路通</view>
+				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
+					>跨境E路通</view
+				>
 			</template>
 		</CustomNavbar>
 		<view class="top-box">
@@ -39,6 +41,7 @@
 					class="image-wrapper"
 					:key="index"
 					v-show="activeItem === index"
+					@click="handleInfoClick(info)"
 				>
 					<image class="bg-image" :src="info.image" mode="scaleToFill"></image>
 					<view class="box">
@@ -114,7 +117,8 @@ export default {
 				{
 					image: '../../static/images/index/exchange.png',
 					title: '全球汇率实时展示',
-					introduction: '一站式快速预览'
+					introduction: '一站式快速预览',
+					path: '/packageHome/pages/currency/index'
 				},
 				{
 					image: '../../static/images/index/event.png',
@@ -143,6 +147,17 @@ export default {
 			uni.navigateTo({
 				url: '/packageHome/pages/digital/index'
 			})
+		},
+		/**
+		 * @desc 点击资讯中心
+		 * @param {Object} info
+		 */
+		handleInfoClick(info) {
+			if (info.path) {
+				uni.navigateTo({
+					url: info.path
+				})
+			}
 		}
 	}
 }
@@ -162,7 +177,7 @@ export default {
 	}
 }
 
-.navbar-text {
+.navbar-text-center {
 	padding-left: 36rpx;
 	text-align: left;
 	font-family:

@@ -39,6 +39,9 @@
 				},
 				{
 					"path": "pages/digital/index"
+				},
+				{
+					"path": "pages/currency/index"
 				}
 			]
 		},

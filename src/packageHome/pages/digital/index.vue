@@ -2,7 +2,9 @@
 	<view class="page-container">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
-				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">数字账户</view>
+				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
+					>数字账户</view
+				>
 			</template>
 		</CustomNavbar>
 		<view class="page-content">
@@ -95,15 +97,6 @@ export default {
 	:deep(.fixed-navigation-bar) {
 		background-color: #fff;
 	}
-}
-
-.navbar-text {
-	font-family:
-		PingFangSC,
-		PingFang SC;
-	font-weight: 600;
-	font-size: 34rpx;
-	color: #000000;
 }
 
 .page-content {

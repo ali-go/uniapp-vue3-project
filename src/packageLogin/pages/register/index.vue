@@ -2,18 +2,26 @@
 	<div class="page-container">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
-				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">用户注册</view>
+				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
+					>用户注册</view
+				>
 			</template>
 		</CustomNavbar>
 		<view class="page-content">
 			<view class="tab-wrapper">
 				<view class="tab-items">
-					<view class="tab-item-wrapper" :class="activeName === '1' ? 'tab-active' : 'tab-inactive'">
+					<view
+						class="tab-item-wrapper"
+						:class="activeName === '1' ? 'tab-active' : 'tab-inactive'"
+					>
 						<view class="tab-item">
 							<view class="title"><text>企业用户注册</text></view>
 						</view>
 					</view>
-					<view class="tab-item-wrapper" :class="activeName === '2' ? 'tab-active' : 'tab-inactive'">
+					<view
+						class="tab-item-wrapper"
+						:class="activeName === '2' ? 'tab-active' : 'tab-inactive'"
+					>
 						<view class="tab-item">
 							<view class="title"><text>个人用户注册</text></view>
 						</view>
@@ -28,11 +36,19 @@
 					</template>
 				</view>
 				<view class="protocol-box">
-					<uni-data-checkbox v-model="checked" selectedColor="#3264ed" multiple
-						:localdata="protocol"></uni-data-checkbox>
-					<view>我已阅读并接受<navigator url="/pages/protocol/data" open-type="navigate"><text>《用户协议》</text>
+					<uni-data-checkbox
+						v-model="checked"
+						selectedColor="#3264ed"
+						multiple
+						:localdata="protocol"
+					></uni-data-checkbox>
+					<view
+						>我已阅读并接受<navigator url="/pages/protocol/data" open-type="navigate"
+							><text>《用户协议》</text>
 						</navigator>
-						<navigator url="/pages/protocol/privacy" open-type="navigate"><text>《用户隐私政策》</text></navigator>
+						<navigator url="/pages/protocol/privacy" open-type="navigate"
+							><text>《用户隐私政策》</text></navigator
+						>
 					</view>
 				</view>
 				<button class="btn-submit" @click="handleSubmit">立即开通</button>
@@ -111,16 +127,6 @@ export default {
 	}
 }
 
-.navbar-text {
-	font-family:
-		PingFangSC,
-		PingFang SC;
-	font-weight: 600;
-	font-size: 34rpx;
-	color: #000000;
-	margin-bottom: 32rpx;
-}
-
 .page-content {
 	position: relative;
 
@@ -128,8 +134,8 @@ export default {
 		content: '';
 		width: 100%;
 		height: calc(100vh - 208rpx);
-		background: #FFFFFF;
-		border: 2rpx solid #FFFFFF;
+		background: #ffffff;
+		border: 2rpx solid #ffffff;
 		opacity: 0.6;
 		backdrop-filter: blur(12px);
 		position: absolute;
@@ -173,7 +179,12 @@ export default {
 							display: inline-block;
 							width: 76rpx;
 							height: 28rpx;
-							background: linear-gradient(90deg, rgba(255, 246, 246, 0) 0%, #b085ff 64%, #555cff 100%);
+							background: linear-gradient(
+								90deg,
+								rgba(255, 246, 246, 0) 0%,
+								#b085ff 64%,
+								#555cff 100%
+							);
 							border-radius: 0rpx 8rpx 16rpx 0rpx;
 							opacity: 0.49;
 							position: relative;
@@ -191,7 +202,6 @@ export default {
 						// background-color: ;
 						position: absolute;
 						bottom: 0;
-
 					}
 				}
 
@@ -204,7 +214,7 @@ export default {
 				content: '';
 				width: 100%;
 				height: 100%;
-				background: linear-gradient(180deg, #A18AFF 0%, #73A4FF 100%);
+				background: linear-gradient(180deg, #a18aff 0%, #73a4ff 100%);
 				position: absolute;
 				top: 0;
 				left: 0;
@@ -283,7 +293,7 @@ export default {
 			display: none;
 		}
 
-		.is-required+text {
+		.is-required + text {
 			display: flex;
 			align-items: center;
 

@@ -4,6 +4,15 @@ page {
 	--text-fail-color: #FF4040;
 }
 
+.fixed-navigation-bar .navbar-text-center {
+  font-family:
+    PingFangSC,
+    PingFang SC;
+  font-weight: 600;
+  font-size: 34rpx;
+  color: #000000;
+}
+
 .success-text {
 	color: var(--text-success-color);
 }

@@ -2,7 +2,9 @@
 	<view class="page-container">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
-				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">更多功能</view>
+				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
+					>更多功能</view
+				>
 			</template>
 		</CustomNavbar>
 		<view class="page-content">
@@ -63,18 +65,9 @@ export default {
 	display: flex;
 	flex-direction: column;
 
-	:deep(.custom-navbar) {
+	:deep(.fixed-navigation-bar) {
 		background-color: #fff;
 	}
-}
-
-.navbar-text {
-	font-family:
-		PingFangSC,
-		PingFang SC;
-	font-weight: 600;
-	font-size: 34rpx;
-	color: #000000;
 }
 
 .page-content {

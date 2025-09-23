@@ -50,8 +50,6 @@ export default {
 
 <style scoped lang="scss">
 .custom-navbar {
-	box-sizing: content-box;
-
 	.click-area {
 		position: absolute;
 		bottom: 0;

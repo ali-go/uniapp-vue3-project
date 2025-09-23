@@ -2,7 +2,7 @@
 	<view class="page-container">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
-				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">跨境E链</view>
+				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }">跨境E链</view>
 			</template>
 		</CustomNavbar>
 		<ProductChoose></ProductChoose>
@@ -56,14 +56,6 @@ export default {
 	flex-direction: column;
 	overflow: hidden;
 	height: 100vh;
-}
-.navbar-text {
-	font-family:
-		PingFangSC,
-		PingFang SC;
-	font-weight: 600;
-	font-size: 34rpx;
-	color: #000000;
 }
 .order-filter {
 	height: 96rpx;
