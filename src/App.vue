@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style>
+@import './static/styles/reset.css';
 /*每个页面公共css */
-@import './styles/reset.css';
-@import './styles/global.css';
+@import './static/styles/global.css';
 </style>

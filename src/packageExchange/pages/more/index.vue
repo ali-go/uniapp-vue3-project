@@ -1,5 +1,5 @@
 <template>
-	<div class="page-container">
+	<view class="page-container">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">更多功能</view>
@@ -21,7 +21,7 @@
 				</view>
 			</view>
 		</view>
-	</div>
+	</view>
 </template>
 
 <script>
@@ -91,5 +91,5 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import '@/styles/business-items.scss';
+@import '@static/styles/business-items.scss';
 </style>

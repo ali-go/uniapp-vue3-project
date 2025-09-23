@@ -65,7 +65,7 @@
 				<view class="left-box box">
 					<view class="title">数字账户</view>
 					<view class="description">智能跨境提款</view>
-					<button>查看详情</button>
+					<button @click="handleDigitalClick">查看详情</button>
 					<image src="@static/images/index/digit-account.png" mode="scaleToFill" />
 				</view>
 				<view class="right-box box">
@@ -135,6 +135,14 @@ export default {
 			if (item.path) {
 				uni.navigateTo({ url: item.path })
 			}
+		},
+		/**
+		 * @desc 点击数字账户详情
+		 */
+		handleDigitalClick() {
+			uni.navigateTo({
+				url: '/packageExchange/pages/digital/index'
+			})
 		}
 	}
 }
@@ -478,5 +486,5 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import '@/styles/business-items.scss';
+@import '@static/styles/business-items.scss';
 </style>

@@ -31,7 +31,7 @@ export const BUSINESS_ITEMS = [
 		imageHeight: '48rpx'
 	},
 	{
-		background: `background: linear-gradient( 321deg, #E0F0FF 0%, #F5FBFF 100%);`,
+		background: `linear-gradient( 321deg, #E0F0FF 0%, #F5FBFF 100%);`,
 		title: '留学汇款',
 		imageWidth: '48rpx',
 		imageHeight: '48rpx'
