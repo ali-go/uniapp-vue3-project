@@ -18,6 +18,7 @@
 				border-radius: 32rpx;
 				border: 1rpx solid;
 				border-image: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.45)) 1 1;
+				clip-path: inset(0 round 32rpx);
 				display: flex;
 				align-items: center;
 				justify-content: center;

@@ -82,8 +82,8 @@ export default {
 
 <style lang="scss" scoped>
 .page-container {
-	background-size: cover;
 	background-size: 100% 100%;
+	background-position: center center;
 	background-repeat: no-repeat;
 }
 

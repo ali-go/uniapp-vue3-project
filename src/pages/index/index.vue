@@ -1,5 +1,5 @@
 <template>
-	<view class="page-container">
+	<view class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
 		<CustomNavbar :isBack="false">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text" :style="{ lineHeight: navigationBarHeight }">跨境E路通</view>
@@ -14,7 +14,12 @@
 		<view class="business-wrapper">
 			<view class="title"> <text>业务大厅</text> </view>
 			<view class="business-items">
-				<view v-for="(business, index) in businessItems" class="business-item" :key="index">
+				<view
+					v-for="(business, index) in businessItems"
+					class="business-item"
+					@click="handleBusinessClick(business)"
+					:key="index"
+				>
 					<view :style="{ background: business.background }" class="icon-box">
 						<image
 							:src="`../../static/images/public/business${index === businessItems.length - 1 ? '-more' : index + 1}.png`"
@@ -84,6 +89,7 @@
 
 <script>
 import CustomNavbar from '@/components/CustomNavbar.vue'
+import bg_url from '@/static/images/index/bg.png'
 import { BUSINESS_ITEMS } from '../../constants'
 
 export default {
@@ -92,13 +98,15 @@ export default {
 	},
 	data() {
 		return {
+			bg_url,
 			businessItems: [
 				...BUSINESS_ITEMS,
 				{
 					background: `linear-gradient( 315deg, #FEEED7 0%, #FDF9F2 100%)`,
 					title: '更多',
 					imageWidth: '44rpx',
-					imageHeight: '44rpx'
+					imageHeight: '44rpx',
+					path: '/packageExchange/pages/more/index'
 				}
 			], // 业务大厅
 			activeItem: 0, // 当前选中项
@@ -117,33 +125,32 @@ export default {
 		}
 	},
 	onLoad() {},
-	methods: {}
+	methods: {
+		/**
+		 * @desc 点击就业务大厅
+		 * @param {Object} item
+		 * @param {String} item.path 路径
+		 */
+		handleBusinessClick(item) {
+			if (item.path) {
+				uni.navigateTo({ url: item.path })
+			}
+		}
+	}
 }
 </script>
 
 <style scoped lang="scss">
 .page-container {
 	position: relative;
-	background: linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%);
 	padding-bottom: 30rpx;
+	background-size: 100% 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
 
 	:deep(.fixed-navigation-bar) {
 		position: relative;
 		top: 0 !important;
-	}
-
-	&::after {
-		content: '';
-		width: 100%;
-		height: 614rpx;
-		border: 128rpx solid;
-		opacity: 0.31;
-		border-image: linear-gradient(90deg, rgba(18, 121, 255, 1), rgba(128, 43, 255, 1)) 128 128;
-		filter: blur(75.5px);
-		box-sizing: border-box;
-		position: absolute;
-		top: 0;
-		left: 0;
 	}
 }
 
@@ -298,7 +305,7 @@ export default {
 			line-height: 34rpx;
 
 			text + text {
-				margin-left: 24rpx;
+				margin-left: 16rpx;
 			}
 		}
 	}
@@ -471,5 +478,5 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import '../../static/styles/business-items.scss';
+@import '@/styles/business-items.scss';
 </style>

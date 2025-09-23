@@ -91,5 +91,5 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import '@static/styles/business-items.scss';
+@import '@/styles/business-items.scss';
 </style>
