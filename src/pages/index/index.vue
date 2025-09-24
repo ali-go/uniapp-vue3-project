@@ -118,7 +118,7 @@ export default {
 					image: '../../static/images/index/exchange.png',
 					title: '全球汇率实时展示',
 					introduction: '一站式快速预览',
-					path: '/packageHome/pages/currency/index'
+					path: '/packageHome/pages/ex-rate/index'
 				},
 				{
 					image: '../../static/images/index/event.png',

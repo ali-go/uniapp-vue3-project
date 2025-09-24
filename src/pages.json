@@ -41,7 +41,10 @@
 					"path": "pages/digital/index"
 				},
 				{
-					"path": "pages/currency/index"
+					"path": "pages/ex-rate/index"
+				},
+				{
+					"path": "pages/ex-rate-detail/index"
 				}
 			]
 		},

@@ -91,17 +91,12 @@ export default {
 
 <style lang="scss" scoped>
 .page-container {
-	display: flex;
-	flex-direction: column;
-
 	:deep(.fixed-navigation-bar) {
 		background-color: #fff;
 	}
 }
 
 .page-content {
-	flex: 1;
-
 	.top-wrapper {
 		padding-top: 46rpx;
 		height: 732rpx;
