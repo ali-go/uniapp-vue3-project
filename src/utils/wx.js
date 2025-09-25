@@ -76,3 +76,76 @@ export const navigateBack = func => {
 		}
 	}
 }
+
+/**
+ * @desc 保存图片
+ * @param {Function} func
+ */
+export const saveImage = url => {
+	const save = image =>
+		uni.saveImageToPhotosAlbum({
+			filePath: image,
+			success() {
+				uni.showToast({
+					title: '保存成功',
+					icon: 'success'
+				})
+			},
+			fail(err) {
+				if (
+					err.errMsg === 'saveImageToPhotosAlbum:fail:auth denied' ||
+					err.errMsg === 'saveImageToPhotosAlbum:fail auth deny' ||
+					err.errMsg === 'saveImageToPhotosAlbum:fail authorize no response'
+				) {
+					uni.showModal({
+						title: '提示',
+						content: '需要您授权保存相册',
+						success: res => {
+							if (res.confirm) {
+								wx.openSetting({})
+							}
+						}
+					})
+					return
+				}
+
+				uni.showToast({
+					title: '保存失败',
+					icon: 'error'
+				})
+			}
+		})
+
+	if (url.indexOf('https') === 0) {
+		wx.downloadFile({
+			url,
+			success: function (res) {
+				if (res.statusCode === 200) {
+					const image = res.tempFilePath
+					save(image)
+				}
+			},
+			fail: function (err) {
+				console.error('err', err)
+				uni.showToast({
+					title: '保存失败',
+					icon: 'error'
+				})
+			}
+		})
+	} else {
+		uni.getImageInfo({
+			src: url,
+			success: ({ path }) => {
+				save(path)
+			},
+			fail: err => {
+				console.error('err', err)
+				uni.showToast({
+					title: '保存失败',
+					icon: 'error'
+				})
+			}
+		})
+	}
+}

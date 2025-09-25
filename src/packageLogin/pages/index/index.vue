@@ -1,5 +1,5 @@
 <template>
-	<div class="page-container">
+	<div class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
@@ -8,25 +8,27 @@
 			</template>
 		</CustomNavbar>
 		<view class="icon-box">
-			<view class="outer">
-				<view class="inner">
-					<image src="" mode="scaleToFill" />
-				</view>
-			</view>
+			<image src="../../static/images/logo.png" mode="scaleToFill" />
 		</view>
 		<button class="btn btn-phone">手机号快捷登录</button>
-		<button class="btn btn-other-phone">其他手机号登录</button>
+		<button class="btn btn-other-phone" @click="handleOtherPhoneLogin">其他手机号登录</button>
 		<button class="btn btn-register">我要注册</button>
 	</div>
 </template>
 
 <script>
 import CustomNavbar from '@/components/CustomNavbar.vue'
+import bg_url from '@/static/images/index/bg.png'
 import { navigateBack } from '@/utils/wx'
 
 export default {
 	components: {
 		CustomNavbar
+	},
+	data() {
+		return {
+			bg_url
+		}
 	},
 	methods: {
 		/**
@@ -34,45 +36,37 @@ export default {
 		 */
 		onBackPress() {
 			navigateBack()
+		},
+		/**
+		 * @desc 点击其它手机号注册
+		 */
+		handleOtherPhoneLogin() {
+			uni.navigateTo({
+				url: '/packageLogin/pages/other-phone/index'
+			})
 		}
 	}
 }
 </script>
 
 <style lang="scss" scoped>
-.icon-box,
-.icon-box view {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.page-container {
+	background-size: 100% 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 
 .icon-box {
 	width: 328rpx;
 	height: 328rpx;
 	margin: 16rpx auto 20rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-	.outer {
-		width: 152rpx;
-		height: 152rpx;
-		background: linear-gradient(
-			135deg,
-			rgb(161, 138, 255, 0.26) 0%,
-			rgba(115, 164, 255, 0.26) 100%
-		);
-		border-radius: 50%;
-	}
-
-	.inner {
-		width: 120rpx;
-		height: 120rpx;
-		background: linear-gradient(135deg, #a18aff 0%, #73a4ff 100%);
-		border-radius: 50%;
-
-		image {
-			width: 76rpx;
-			height: 76rpx;
-		}
+	image {
+		width: 328rpx;
+		height: 328rpx;
 	}
 }
 
@@ -106,7 +100,8 @@ export default {
 
 .btn-register {
 	background: #ffffff;
-	border: 2rpx solid rgba(0, 0, 0, 0.1);
-	color: #000000;
+	background: linear-gradient(135deg, #a18aff 0%, #73a4ff 100%);
+	opacity: 0.63;
+	color: #ffffff;
 }
 </style>

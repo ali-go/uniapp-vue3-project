@@ -8,7 +8,7 @@
 			</template>
 		</CustomNavbar>
 		<view class="top-box">
-			<button>注册/登录</button>
+			<button @click="handleLogin">注册/登录</button>
 			<view class="image-box">
 				<!-- <image src="@static/images/index/zh-CN.png" mode="scaleToFill" /> -->
 			</view>
@@ -158,6 +158,14 @@ export default {
 					url: info.path
 				})
 			}
+		},
+		/**
+		 * @desc 去注册
+		 */
+		handleLogin() {
+			uni.navigateTo({
+				url: '/packageLogin/pages/index/index'
+			})
 		}
 	}
 }
@@ -165,15 +173,13 @@ export default {
 
 <style scoped lang="scss">
 .page-container {
-	position: relative;
 	padding-bottom: 30rpx;
 	background-size: 100% 100%;
 	background-position: center center;
 	background-repeat: no-repeat;
 
 	:deep(.fixed-navigation-bar) {
-		position: relative;
-		top: 0 !important;
+		position: static;
 	}
 }
 

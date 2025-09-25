@@ -1,5 +1,5 @@
 <template>
-	<div class="page-container">
+	<div class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
@@ -7,53 +7,59 @@
 				>
 			</template>
 		</CustomNavbar>
-		<view class="page-content">
-			<view class="tab-wrapper">
+		<view class="tab-wrapper">
+			<view class="tab-items-wrapper">
+				<image
+					class="bg"
+					:src="activeName === '1' ? tab_bg_left : tab_bg_right"
+					mode="scaleToFill"
+				/>
 				<view class="tab-items">
 					<view
-						class="tab-item-wrapper"
-						:class="activeName === '1' ? 'tab-active' : 'tab-inactive'"
+						class="tab-item"
+						:class="{ 'tab-active': activeName === '1' }"
+						@click="handleTabClick('1')"
 					>
-						<view class="tab-item">
-							<view class="title"><text>企业用户注册</text></view>
-						</view>
+						<view class="title"><text>企业用户注册</text></view>
 					</view>
 					<view
-						class="tab-item-wrapper"
-						:class="activeName === '2' ? 'tab-active' : 'tab-inactive'"
+						class="tab-item"
+						:class="{ 'tab-active': activeName === '2' }"
+						@click="handleTabClick('2')"
 					>
-						<view class="tab-item">
-							<view class="title"><text>个人用户注册</text></view>
-						</view>
+						<view class="title"><text>个人用户注册</text></view>
 					</view>
 				</view>
-				<view class="register-form-wrapper">
-					<template v-if="activeName === '1'">
-						<RegisterCompany ref="companyRef" />
-					</template>
-					<template v-else>
-						<RegisterCustomer ref="customerRef" />
-					</template>
-				</view>
-				<view class="protocol-box">
-					<uni-data-checkbox
-						v-model="checked"
-						selectedColor="#3264ed"
-						multiple
-						:localdata="protocol"
-					></uni-data-checkbox>
-					<view
-						>我已阅读并接受<navigator url="/pages/protocol/data" open-type="navigate"
-							><text>《用户协议》</text>
-						</navigator>
-						<navigator url="/pages/protocol/privacy" open-type="navigate"
-							><text>《用户隐私政策》</text></navigator
-						>
-					</view>
-				</view>
-				<button class="btn-submit" @click="handleSubmit">立即开通</button>
 			</view>
+			<view class="register-form-wrapper">
+				<template v-if="activeName === '1'">
+					<RegisterCompany ref="companyRef" />
+				</template>
+				<template v-else>
+					<RegisterCustomer ref="customerRef" />
+				</template>
+			</view>
+			<view class="protocol-box">
+				<uni-data-checkbox
+					v-model="checked"
+					selectedColor="#3264ed"
+					multiple
+					:localdata="protocol"
+				></uni-data-checkbox>
+				<view
+					>我已阅读并接受<navigator url="/pages/protocol/data" open-type="navigate"
+						><text>《用户协议》</text>
+					</navigator>
+					<navigator url="/pages/protocol/privacy" open-type="navigate"
+						><text>《用户隐私政策》</text></navigator
+					>
+				</view>
+			</view>
+			<button class="btn-submit" @click="handleSubmit">立即开通</button>
 		</view>
+		<uni-popup ref="popup" background-color="rgba(0, 0, 0, 0.5)">
+			<view class="popup-content"> 内容 </view>
+		</uni-popup>
 	</div>
 </template>
 
@@ -62,6 +68,9 @@ import CustomNavbar from '@/components/CustomNavbar.vue'
 import RegisterCompany from '@/packageLogin/components/RegisterCompany.vue'
 import RegisterCustomer from '@/packageLogin/components/RegisterCustomer.vue'
 import { navigateBack } from '@/utils/wx'
+import bg_url from '@/static/images/index/bg.png'
+import tab_bg_left from '@/static/images/public/tab-bg-left.png'
+import tab_bg_right from '@/static/images/public/tab-bg-right.png'
 
 export default {
 	components: {
@@ -71,9 +80,12 @@ export default {
 	},
 	data() {
 		return {
+			bg_url,
 			activeName: '1', // tab 绑定值 1 企业；2 个人
 			checked: '', // 协议勾选
-			protocol: [{ text: '', value: '1' }] // 协议勾选
+			protocol: [{ text: '', value: '1' }], // 协议勾选
+			tab_bg_left,
+			tab_bg_right
 		}
 	},
 	methods: {
@@ -82,6 +94,17 @@ export default {
 		 */
 		onBackPress() {
 			navigateBack()
+		},
+		/**
+		 * @desc 切换 tab
+		 * @param {String} activeName
+		 */
+		handleTabClick(activeName) {
+			if (activeName === this.activeName) {
+				return
+			}
+
+			this.activeName = activeName
 		},
 		/**
 		 * @desc 提交
@@ -111,116 +134,38 @@ export default {
 
 <style lang="scss" scoped>
 .page-container {
-	position: relative;
-
-	&::after {
-		content: '';
-		width: 100%;
-		height: 616rpx;
-		border: 128rpx solid;
-		opacity: 0.31;
-		border-image: linear-gradient(90deg, rgba(18, 121, 255, 1), rgba(128, 43, 255, 1)) 128 128;
-		filter: blur(75.5px);
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-}
-
-.page-content {
-	position: relative;
-
-	&::after {
-		content: '';
-		width: 100%;
-		height: calc(100vh - 208rpx);
-		background: #ffffff;
-		border: 2rpx solid #ffffff;
-		opacity: 0.6;
-		backdrop-filter: blur(12px);
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 2;
-	}
+	background-size: 100% 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 
 .tab-wrapper {
+	margin-top: 32rpx;
 	border-radius: 16rpx 16rpx 0rpx 0rpx;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 4;
+
+	.tab-items-wrapper {
+		position: relative;
+		height: 142rpx;
+		overflow: hidden;
+
+		image.bg {
+			width: 100%;
+			height: 148rpx;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 2;
+		}
+	}
 
 	.tab-items {
+		width: 100%;
 		display: flex;
 		margin-bottom: 22rpx;
-
-		.tab-item-wrapper {
-			flex: 1;
-			position: relative;
-			display: flex;
-			height: 120rpx;
-
-			&.tab-active {
-				.tab-item {
-					.title {
-						text {
-							height: 40rpx;
-							font-weight: 600;
-							color: #323233;
-							line-height: 40rpx;
-							position: relative;
-							z-index: 4;
-						}
-
-						&::after {
-							content: '';
-							display: inline-block;
-							width: 76rpx;
-							height: 28rpx;
-							background: linear-gradient(
-								90deg,
-								rgba(255, 246, 246, 0) 0%,
-								#b085ff 64%,
-								#555cff 100%
-							);
-							border-radius: 0rpx 8rpx 16rpx 0rpx;
-							opacity: 0.49;
-							position: relative;
-							top: 14rpx;
-							left: -48rpx;
-							z-index: 2;
-						}
-					}
-
-					&::before,
-					&::after {
-						content: '';
-						width: 44rpx;
-						height: 88rpx;
-						// background-color: ;
-						position: absolute;
-						bottom: 0;
-					}
-				}
-
-				&::after {
-					content: none;
-				}
-			}
-
-			&::after {
-				content: '';
-				width: 100%;
-				height: 100%;
-				background: linear-gradient(180deg, #a18aff 0%, #73a4ff 100%);
-				position: absolute;
-				top: 0;
-				left: 0;
-				z-index: 2;
-			}
-		}
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 4;
 
 		.tab-item {
 			width: 100%;
@@ -228,10 +173,6 @@ export default {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: 4;
 
 			.title {
 				text {
@@ -243,6 +184,38 @@ export default {
 					font-size: 30rpx;
 					color: #ffffff;
 					line-height: 44rpx;
+				}
+			}
+
+			&.tab-active {
+				.title {
+					text {
+						height: 40rpx;
+						font-weight: 600;
+						color: #323233;
+						line-height: 40rpx;
+						position: relative;
+						z-index: 4;
+					}
+
+					&::after {
+						content: '';
+						display: inline-block;
+						width: 76rpx;
+						height: 28rpx;
+						background: linear-gradient(
+							90deg,
+							rgba(255, 246, 246, 0) 0%,
+							#b085ff 64%,
+							#555cff 100%
+						);
+						border-radius: 0rpx 8rpx 16rpx 0rpx;
+						opacity: 0.49;
+						position: relative;
+						top: 14rpx;
+						left: -48rpx;
+						z-index: 2;
+					}
 				}
 			}
 		}
