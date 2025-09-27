@@ -29,7 +29,8 @@
 			<view class="transfer-record-items">
 				<view v-for="(record, index) in records" class="transfer-record-item" :key="index">
 					<uni-collapse ref="collapse" v-model="record.value" @change="() => handleCollapse(index)">
-						<uni-collapse-item title-border="none" :border="false" :show-arrow="false">
+						<uni-collapse-item title-border="none" :border="false" :show-arrow="false"
+							:show-animation="showAnimation">
 							<template v-slot:title>
 								<view class="top-header">
 									<view class="date">{{ record.date }}</view>
@@ -40,7 +41,7 @@
 									</view>
 								</view>
 							</template>
-							<view class="collapsed-box" :class="record.collapsed ? 'collapsed' : 'expanded'">
+							<view class="collapsed-box">
 								<view v-for="(row, rowIndex) in record.list" class="record-box" :key="rowIndex">
 									<view class="left-box">
 										<view class="info-box">
@@ -96,6 +97,7 @@ export default {
 	},
 	data() {
 		return {
+			showAnimation: false, // 开始加载时不显示动画
 			fixedBarHeight: `${getApp().globalData.statusBarHeight + getApp().globalData.navigationBarHeight}px`, // 固定栏的高度
 			activeName: '1', // tab 绑定值 1 汇入 2 汇出
 			tab_bg_left,
@@ -155,6 +157,11 @@ export default {
 			],
 			uploadPopup: false
 		}
+	},
+	onShow() {
+		setTimeout(() => {
+			this.showAnimation = true // 开启动画
+		}, 300)
 	},
 	methods: {
 		/**
