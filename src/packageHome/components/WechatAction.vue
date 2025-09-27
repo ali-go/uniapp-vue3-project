@@ -1,5 +1,5 @@
 <template>
-	<view v-show="popup" class="mask-container">
+	<view v-show="popup" class="mask-container" :class="{ show: popup }">
 		<image class="poster" src="../static/images/digital/poster.png" mode="scaleToFill" />
 		<view class="wechat-action-bar">
 			<view class="title">立即分享给好友</view>
@@ -58,6 +58,12 @@ defineEmits(['update:popup'])
 		bottom: calc(496rpx + env(safe-area-inset-bottom));
 		transform: translateX(-50%);
 	}
+
+	&.show {
+		animation-name: show;
+		animation-duration: 0.3s;
+		animation-timing-function: ease-out;
+	}
 }
 
 .wechat-action-bar {
@@ -69,7 +75,10 @@ defineEmits(['update:popup'])
 	position: absolute;
 	left: 0;
 	bottom: 0rpx;
-	transition: all 0.1s ease-out;
+	will-change: height;
+	animation-name: slide-up;
+	animation-duration: 0.1s;
+	animation-timing-function: ease-out;
 
 	.title {
 		text-align: center;
@@ -141,6 +150,26 @@ defineEmits(['update:popup'])
 		font-size: 32rpx;
 		color: #646566;
 		line-height: 96rpx;
+	}
+}
+
+@keyframes show {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes slide-up {
+	0% {
+		height: 0;
+	}
+
+	100% {
+		height: 392rpx;
 	}
 }
 </style>

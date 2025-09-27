@@ -2,9 +2,7 @@
 	<view class="page-container">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
-				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
-					>历史汇款查询</view
-				>
+				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }">历史汇款查询</view>
 			</template>
 		</CustomNavbar>
 		<view class="filter-box">
@@ -18,67 +16,56 @@
 		</view>
 		<view class="tab-wrapper">
 			<view class="tab-items-wrapper">
-				<image
-					class="bg"
-					:src="activeName === '1' ? tab_bg_left : tab_bg_right"
-					mode="scaleToFill"
-				/>
+				<image class="bg" :src="activeName === '1' ? tab_bg_left : tab_bg_right" mode="scaleToFill" />
 				<view class="tab-items">
-					<view
-						class="tab-item"
-						:class="{ 'tab-active': activeName === '1' }"
-						@click="handleTabClick('1')"
-					>
+					<view class="tab-item" :class="{ 'tab-active': activeName === '1' }" @click="handleTabClick('1')">
 						<view class="title"><text>汇入</text></view>
 					</view>
-					<view
-						class="tab-item"
-						:class="{ 'tab-active': activeName === '2' }"
-						@click="handleTabClick('2')"
-					>
+					<view class="tab-item" :class="{ 'tab-active': activeName === '2' }" @click="handleTabClick('2')">
 						<view class="title"><text>汇出</text></view>
 					</view>
 				</view>
 			</view>
 			<view class="transfer-record-items">
 				<view v-for="(record, index) in records" class="transfer-record-item" :key="index">
-					<view class="top-header">
-						<view class="date">{{ record.date }}</view>
-						<view class="collapse" @click="handleCollapse(index)">
-							<text>{{ record.collapsed ? '展开' : '收起' }}</text>
-							<image
-								src="../../static/images/down.png"
-								mode="scaleToFill"
-								:style="{ transform: `rotate(${record.collapsed ? 0 : -180}deg)` }"
-							/>
-						</view>
-					</view>
-					<view class="collapsed-box" :class="record.collapsed ? 'collapsed' : 'expanded'">
-						<view v-for="(row, rowIndex) in record.list" class="record-box" :key="rowIndex">
-							<view class="left-box">
-								<view class="info-box">
-									<image src="../../static/images/money.png" mode="scaleToFill" />
-									<text class="nickname">{{ row.nickname }}</text>
-									<text class="tail-number">(尾号{{ row.tailNumber }})</text>
+					<uni-collapse ref="collapse" v-model="record.value" @change="() => handleCollapse(index)">
+						<uni-collapse-item title-border="none" :border="false" :show-arrow="false">
+							<template v-slot:title>
+								<view class="top-header">
+									<view class="date">{{ record.date }}</view>
+									<view class="collapse">
+										<text>{{ record.collapsed ? '展开' : '收起' }}</text>
+										<image src="../../static/images/down.png" mode="scaleToFill"
+											:style="{ transform: `rotate(${record.collapsed ? 0 : -180}deg)` }" />
+									</view>
 								</view>
-								<view class="datetime">{{ row.datetime }}</view>
+							</template>
+							<view class="collapsed-box" :class="record.collapsed ? 'collapsed' : 'expanded'">
+								<view v-for="(row, rowIndex) in record.list" class="record-box" :key="rowIndex">
+									<view class="left-box">
+										<view class="info-box">
+											<image src="../../static/images/money.png" mode="scaleToFill" />
+											<text class="nickname">{{ row.nickname }}</text>
+											<text class="tail-number">(尾号{{ row.tailNumber }})</text>
+										</view>
+										<view class="datetime">{{ row.datetime }}</view>
+									</view>
+									<view class="right-box">
+										<view class="money"
+											:class="record.type === '行内汇入' ? 'positive-amount' : 'negative-amount'">
+											{{ row.amount }}</view>
+										<view class="source">{{ record.type }}</view>
+									</view>
+								</view>
+								<view class="certificate-box">
+									<text class="text">电子凭证</text>
+									<button class="btn-upload" @click="handleUploadPopup">待上传</button>
+									<!-- <text class="process processing">审核中</text> -->
+									<!-- <text class="process success">审核成功</text> -->
+								</view>
 							</view>
-							<view class="right-box">
-								<view
-									class="money"
-									:class="record.type === '行内汇入' ? 'positive-amount' : 'negative-amount'"
-									>{{ row.amount }}</view
-								>
-								<view class="source">{{ record.type }}</view>
-							</view>
-						</view>
-						<view class="certificate-box">
-							<text class="text">电子凭证</text>
-							<button class="btn-upload" @click="handleUploadPopup">待上传</button>
-							<!-- <text class="process processing">审核中</text> -->
-							<!-- <text class="process success">审核成功</text> -->
-						</view>
-					</view>
+						</uni-collapse-item>
+					</uni-collapse>
 				</view>
 			</view>
 		</view>
@@ -124,7 +111,8 @@ export default {
 							amount: '+$162.00'
 						}
 					],
-					type: '行内汇入'
+					type: '行内汇入',
+					value: ['0']
 				},
 				{
 					date: '2025/09/02',
@@ -142,7 +130,8 @@ export default {
 							amount: '+$162.00'
 						}
 					],
-					type: '行内汇入'
+					type: '行内汇入',
+					value: ['0']
 				},
 				{
 					date: '2025/09/02',
@@ -160,7 +149,8 @@ export default {
 							amount: '+$162.00'
 						}
 					],
-					type: '行内汇入'
+					type: '行内汇入',
+					value: ['0']
 				}
 			],
 			uploadPopup: false
@@ -186,6 +176,7 @@ export default {
 		},
 		/**
 		 * @desc 折叠
+		 * @param {Boolean} value
 		 * @param {Number} index
 		 */
 		handleCollapse(index) {
@@ -297,7 +288,7 @@ export default {
 		background-color: #fff;
 		border-radius: 16rpx;
 
-		& + .transfer-record-item {
+		&+.transfer-record-item {
 			margin-top: 20rpx;
 		}
 	}
