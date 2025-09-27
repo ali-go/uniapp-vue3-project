@@ -49,6 +49,17 @@
 			]
 		},
 		{
+			"root": "packageTransfer/",
+			"pages": [
+				{
+					"path": "pages/index/index"
+				},
+				{
+					"path": "pages/past-search/index"
+				}
+			]
+		},
+		{
 			"root": "packageCrossBorderE/",
 			"pages": [
 				{

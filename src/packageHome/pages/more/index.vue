@@ -11,12 +11,14 @@
 			<view class="content-wrapper">
 				<view class="business-items">
 					<view v-for="(business, index) in businessItems" class="business-item" :key="index">
-						<view :style="{ background: business.background }" class="icon-box">
-							<image
-								:src="`../../../static/images/public/business${index + 1}.png`"
-								:style="{ width: business.imageWidth, height: business.imageHeight }"
-								mode="scaleToFill"
-							/>
+						<view class="shadow-box">
+							<view :style="{ background: business.background }" class="icon-box">
+								<image
+									:src="`../../../static/images/public/business${index + 1}.png`"
+									:style="{ width: business.imageWidth, height: business.imageHeight }"
+									mode="scaleToFill"
+								/>
+							</view>
 						</view>
 						<text>{{ business.title }}</text>
 					</view>

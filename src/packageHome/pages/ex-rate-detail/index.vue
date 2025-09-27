@@ -1,5 +1,5 @@
 <template>
-	<div class="page-container">
+	<view class="page-container">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }">详情</view>
@@ -40,7 +40,7 @@
 			</button>
 		</view>
 		<view class="chart-wrapper"> </view>
-	</div>
+	</view>
 </template>
 
 <script>

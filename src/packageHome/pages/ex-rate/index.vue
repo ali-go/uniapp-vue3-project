@@ -1,5 +1,5 @@
 <template>
-	<div class="page-container">
+	<view class="page-container">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }">看汇率</view>
@@ -39,7 +39,7 @@
 				</view>
 			</view>
 		</view>
-	</div>
+	</view>
 </template>
 
 <script>

@@ -22,12 +22,14 @@
 					@click="handleBusinessClick(business)"
 					:key="index"
 				>
-					<view :style="{ background: business.background }" class="icon-box">
-						<image
-							:src="`../../static/images/public/business${index === businessItems.length - 1 ? '-more' : index + 1}.png`"
-							:style="{ width: business.imageWidth, height: business.imageHeight }"
-							mode="scaleToFill"
-						/>
+					<view class="shadow-box">
+						<view :style="{ background: business.background }" class="icon-box">
+							<image
+								:src="`../../static/images/public/business${index === businessItems.length - 1 ? '-more' : index + 1}.png`"
+								:style="{ width: business.imageWidth, height: business.imageHeight }"
+								mode="scaleToFill"
+							/>
+						</view>
 					</view>
 					<text>{{ business.title }}</text>
 				</view>

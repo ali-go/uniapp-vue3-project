@@ -1,5 +1,5 @@
 <template>
-	<div class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
+	<view class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
@@ -60,7 +60,7 @@
 		<uni-popup ref="popup" background-color="rgba(0, 0, 0, 0.5)">
 			<view class="popup-content"> 内容 </view>
 		</uni-popup>
-	</div>
+	</view>
 </template>
 
 <script>
@@ -142,84 +142,6 @@ export default {
 .tab-wrapper {
 	margin-top: 32rpx;
 	border-radius: 16rpx 16rpx 0rpx 0rpx;
-
-	.tab-items-wrapper {
-		position: relative;
-		height: 142rpx;
-		overflow: hidden;
-
-		image.bg {
-			width: 100%;
-			height: 148rpx;
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: 2;
-		}
-	}
-
-	.tab-items {
-		width: 100%;
-		display: flex;
-		margin-bottom: 22rpx;
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 4;
-
-		.tab-item {
-			width: 100%;
-			height: 88rpx;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-
-			.title {
-				text {
-					height: 44rpx;
-					font-family:
-						PingFangSC,
-						PingFang SC;
-					font-weight: 400;
-					font-size: 30rpx;
-					color: #ffffff;
-					line-height: 44rpx;
-				}
-			}
-
-			&.tab-active {
-				.title {
-					text {
-						height: 40rpx;
-						font-weight: 600;
-						color: #323233;
-						line-height: 40rpx;
-						position: relative;
-						z-index: 4;
-					}
-
-					&::after {
-						content: '';
-						display: inline-block;
-						width: 76rpx;
-						height: 28rpx;
-						background: linear-gradient(
-							90deg,
-							rgba(255, 246, 246, 0) 0%,
-							#b085ff 64%,
-							#555cff 100%
-						);
-						border-radius: 0rpx 8rpx 16rpx 0rpx;
-						opacity: 0.49;
-						position: relative;
-						top: 14rpx;
-						left: -48rpx;
-						z-index: 2;
-					}
-				}
-			}
-		}
-	}
 }
 
 .register-form-wrapper {
@@ -430,4 +352,8 @@ export default {
 	line-height: 88rpx;
 	border-radius: 44rpx;
 }
+</style>
+
+<style lang="scss" scoped>
+@import '@static/styles/tab.scss';
 </style>

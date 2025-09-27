@@ -4,7 +4,8 @@ export const BUSINESS_ITEMS = [
 		background: `linear-gradient( 321deg, #E0F0FF 0%, #F5FBFF 100%)`,
 		title: '查汇款',
 		imageWidth: '48rpx',
-		imageHeight: '44rpx'
+		imageHeight: '44rpx',
+		path: '/packageTransfer/pages/index/index'
 	},
 	{
 		background: `linear-gradient( 315deg, #FEEED7 0%, #FDF9F2 100%)`,

@@ -1,5 +1,5 @@
 <template>
-	<div class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
+	<view class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
@@ -11,9 +11,11 @@
 			<image src="../../static/images/logo.png" mode="scaleToFill" />
 		</view>
 		<button class="btn btn-phone">手机号快捷登录</button>
-		<button class="btn btn-other-phone" @click="handleOtherPhoneLogin">其他手机号登录</button>
-		<button class="btn btn-register">我要注册</button>
-	</div>
+		<button class="btn btn-other-phone" @click="handleButtonClick('other-phone')">
+			其他手机号登录
+		</button>
+		<button class="btn btn-register" @click="handleButtonClick('register')">我要注册</button>
+	</view>
 </template>
 
 <script>
@@ -38,12 +40,19 @@ export default {
 			navigateBack()
 		},
 		/**
-		 * @desc 点击其它手机号注册
+		 * @desc 点击跳转
+		 * @param {String} key
 		 */
-		handleOtherPhoneLogin() {
-			uni.navigateTo({
-				url: '/packageLogin/pages/other-phone/index'
-			})
+		handleButtonClick(key) {
+			if (key === 'other-phone') {
+				uni.navigateTo({
+					url: '/packageLogin/pages/other-phone/index'
+				})
+			} else if (key === 'register') {
+				uni.navigateTo({
+					url: '/packageLogin/pages/register/index'
+				})
+			}
 		}
 	}
 }
