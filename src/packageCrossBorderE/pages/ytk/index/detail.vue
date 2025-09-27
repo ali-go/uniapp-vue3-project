@@ -29,7 +29,7 @@
 import CustomNavbar from '@/components/CustomNavbar'
 import DetailCell from '../../../components/detail-cell/index'
 import { navigateBack } from '@/utils/wx'
-
+import { acctStatusMaps, acctStatusClassTextMaps } from '../../../utils/enums/ytk'
 export default {
 	components: {
 		CustomNavbar,
@@ -44,7 +44,13 @@ export default {
 				{ prop: 'bankNo', label: '合作银行' },
 				{ prop: 'terraceName', label: '平台名称' },
 				{ prop: 'storeName', label: '店铺名称' },
-				{ prop: 'acctStatus', label: '申请状态', valueClassFn: row => ['aaa'] }
+				{
+					prop: 'acctStatus',
+					label: '申请状态',
+					format: row => acctStatusMaps[row.acctStatus] || row.acctStatus,
+					valueClassFn: row =>
+						['status-text', acctStatusClassTextMaps[row.acctStatus] || 'safety-text'].join(' ')
+				}
 			]
 		}
 	},

@@ -1,17 +1,15 @@
 <template>
 	<view class="page-content">
-		<!-- 回头根据不同产品渲染不同的index -->
-		<!-- <YtkIndex class="module-content"></YtkIndex> -->
-		<view class="module-content">这是交易查询页面</view>
+		<YtkTrans v-if="currentProductId === '10008'" class="module-content"></YtkTrans>
 	</view>
 </template>
 
 <script>
-// import YtkIndex from '../ytk/index'
+import YtkTrans from '../ytk/trans'
 
 export default {
 	components: {
-		// YtkIndex,
+		YtkTrans
 	},
 	data() {
 		return {

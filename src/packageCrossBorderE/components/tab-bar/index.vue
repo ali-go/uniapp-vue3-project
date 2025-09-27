@@ -33,7 +33,7 @@ export default {
 					tab: 'user'
 				}
 			],
-			currentTab: 'account'
+			currentTab: 'trans'
 		}
 	},
 	created() {},

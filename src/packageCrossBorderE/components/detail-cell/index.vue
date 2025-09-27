@@ -1,7 +1,7 @@
 <template>
 	<view class="detail-cell">
 		<text class="cell-text">{{ label }}</text>
-		<text :class="[...valueClassFn(data), 'cell-value']">{{
+		<text :class="[valueClassFn(data), 'cell-value']">{{
 			format ? format(data) : data[prop]
 		}}</text>
 	</view>
@@ -27,7 +27,7 @@ export default {
 		},
 		valueClassFn: {
 			type: Function,
-			default: () => []
+			default: () => ''
 		}
 	}
 }
@@ -49,7 +49,9 @@ export default {
 	}
 	.cell-value {
 		font-size: 30rpx;
-		color: #323233;
+		&:not(.status-text) {
+			color: #323233;
+		}
 	}
 }
 </style>

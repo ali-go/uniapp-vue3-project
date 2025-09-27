@@ -39,7 +39,7 @@ export default {
 	},
 	data() {
 		return {
-			currentTab: 'account',
+			currentTab: 'trans', // account trans user
 			currentProductId: '' //当前选择的产品
 		}
 	},
