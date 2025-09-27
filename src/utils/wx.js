@@ -92,6 +92,7 @@ export const saveImage = url => {
 				})
 			},
 			fail(err) {
+				console.log('saveImageToPhotosAlbum', err)
 				if (
 					err.errMsg === 'saveImageToPhotosAlbum:fail:auth denied' ||
 					err.errMsg === 'saveImageToPhotosAlbum:fail auth deny' ||

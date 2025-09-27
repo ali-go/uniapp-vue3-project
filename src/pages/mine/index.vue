@@ -1,8 +1,10 @@
 <template>
-	<div class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
+	<view class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
 		<CustomNavbar :isBack="false">
 			<template v-slot="{ navigationBarHeight }">
-				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }">客户中心</view>
+				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
+					>客户中心</view
+				>
 			</template>
 		</CustomNavbar>
 		<view class="login-wrapper">
@@ -43,7 +45,7 @@
 				</view>
 			</view>
 		</view>
-	</div>
+	</view>
 </template>
 
 <script>

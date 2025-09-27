@@ -1,7 +1,7 @@
 page {
-	--text-success-color: #07C160;
-	--text-warning-color: #FAAB0C;
-	--text-fail-color: #FF4040;
+  --text-success-color: #07C160;
+  --text-warning-color: #FAAB0C;
+  --text-fail-color: #FF4040;
 }
 
 .fixed-navigation-bar .navbar-text-center {
@@ -14,11 +14,13 @@ page {
 }
 
 .success-text {
-	color: var(--text-success-color);
+  color: var(--text-success-color);
 }
+
 .warning-text {
-	color: var(--text-warning-color);
+  color: var(--text-warning-color);
 }
+
 .fail-text {
-	color: var(--text-fail-color);
+  color: var(--text-fail-color);
 }

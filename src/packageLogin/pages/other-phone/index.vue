@@ -1,5 +1,5 @@
 <template>
-	<div class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
+	<view class="page-container" :style="{ backgroundImage: `url(${bg_url})` }">
 		<CustomNavbar @onBackPress="onBackPress">
 			<template v-slot="{ navigationBarHeight }">
 				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }"
@@ -42,7 +42,7 @@
 				</navigator>
 			</view>
 		</view>
-	</div>
+	</view>
 </template>
 
 <script>
