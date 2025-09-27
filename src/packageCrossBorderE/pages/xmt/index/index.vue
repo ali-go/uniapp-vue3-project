@@ -9,8 +9,8 @@
 				<view v-for="(accountData, index) in accountList" :key="index" class="module-item">
 					<view class="item-top">
 						<text class="top-text">收款账户{{ (index + 1 + '').padStart(2, 0) }}</text>
-						<view class="top-info" @click="jumpDetail(accountData)">
-							<text class="info-text">了解详情</text>
+						<view class="top-info">
+							<text class="info-text" @click="jumpDetail(accountData)">了解详情</text>
 						</view>
 					</view>
 					<view class="item-content-wrap">
@@ -23,6 +23,7 @@
 					</view>
 				</view>
 			</view>
+			小贸通首页
 		</LoadingScrollView>
 	</view>
 </template>
@@ -50,7 +51,7 @@ export default {
 				}
 			],
 			accountList: [],
-			pageSize: 10,
+			pageSize: 4,
 			page: 1
 		}
 	},
@@ -107,6 +108,7 @@ export default {
 	height: 100%;
 }
 .scroll-content {
+	// background: green;
 	padding: 20rpx 32rpx;
 	.module-item {
 		background: linear-gradient(180deg, #e9edff 0%, #ffffff 55%, #ffffff 100%);

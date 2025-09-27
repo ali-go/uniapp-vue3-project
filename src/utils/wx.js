@@ -149,3 +149,13 @@ export const saveImage = url => {
 		})
 	}
 }
+
+/**
+ *
+ * @param {*} px px尺寸
+ * @returns 对应的rpx尺寸
+ */
+export const pxToRpx = px => {
+	const systemInfo = uni.getSystemInfoSync()
+	return (750 / systemInfo.windowWidth) * px
+}

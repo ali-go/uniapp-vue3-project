@@ -1,49 +1,65 @@
 <template>
 	<view class="page-container">
-		<CustomNavbar @onBackPress="onBackPress">
-			<template v-slot="{ navigationBarHeight }">
-				<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }">跨境E链</view>
-			</template>
-		</CustomNavbar>
-		<ProductChoose></ProductChoose>
-		<view class="order-filter">
-			<view class="order-tool">
-				<image src="" mode="scaleToFill" />
-				<image src="" mode="scaleToFill" />
-				<text class="tool-text">时间排序</text>
-			</view>
-			<view class="filter-tool">
-				<image src="" mode="scaleToFill" />
-				<text class="tool-text">筛选条件</text>
-			</view>
+		<!-- 账户和交易共享导航和产品切换模块 -->
+		<view v-show="currentTab !== 'user'">
+			<CustomNavbar @onBackPress="onBackPress">
+				<template v-slot="{ navigationBarHeight }">
+					<view class="navbar-text-center" :style="{ lineHeight: navigationBarHeight }">
+						跨境E链
+					</view>
+				</template>
+			</CustomNavbar>
+			<ProductChoose @update-product-id="updateProductId"></ProductChoose>
 		</view>
-		<!-- 回头根据不同产品渲染不同的index -->
-		<YtkIndex class="module-content"></YtkIndex>
-		<TabBar></TabBar>
+		<view class="tab-page-content">
+			<Account v-show="currentTab === 'account'" ref="accountRef"></Account>
+			<Trans v-show="currentTab === 'trans'" ref="transRef"></Trans>
+			<User v-show="currentTab === 'user'"></User>
+		</view>
+		<TabBar @update-tab="updateTab" class="tab-bar-wrap"></TabBar>
 	</view>
 </template>
 
 <script>
 import CustomNavbar from '@/components/CustomNavbar'
-import YtkIndex from '../ytk/index'
-import TabBar from '../../components/tab-bar'
 import ProductChoose from '../../components/product-choose'
-// import { navigateBack } from '@/utils/wx'
+import TabBar from '../../components/tab-bar'
+import Account from '../account/index'
+import Trans from '../trans/index'
+import User from '../user/index'
 
 export default {
 	components: {
 		CustomNavbar,
 		ProductChoose,
-		YtkIndex,
-		TabBar
+		TabBar,
+		Account,
+		Trans,
+		User
 	},
 	data() {
-		return {}
+		return {
+			currentTab: 'account',
+			currentProductId: '' //当前选择的产品
+		}
 	},
-	onLoad() {},
+	onLoad() {
+		console.log('创建')
+	},
 	methods: {
+		// 切换产品
+		updateProductId(productId) {
+			this.currentProductId = productId
+			this.$refs.accountRef?.exportUpdateProductId(productId)
+			this.$refs.transRef?.exportUpdateProductId(productId)
+			console.log('productId', productId)
+		},
+		// 切换tab
+		updateTab(tab) {
+			this.currentTab = tab
+		},
+		// 返回：直接返回主包首页
 		nBackPress() {
-			// navigateBack()
 			uni.switchTab({ url: '/pages/index/index' })
 		}
 	}
@@ -56,35 +72,12 @@ export default {
 	flex-direction: column;
 	overflow: hidden;
 	height: 100vh;
-}
-.order-filter {
-	height: 96rpx;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0 40rpx;
-	border-top: 1rpx solid #ebedf0;
-	.tool-text {
-		font-size: 28rpx;
-		color: #646566;
-		margin-left: 10rpx;
+	.tab-page-content {
+		flex: 1;
+		height: 0;
 	}
-	image {
-		width: 16rpx;
-		height: 16rpx;
-		background: #ccc;
-		margin-left: 4rpx;
+	.tab-bar-wrap {
+		height: 100rpx;
 	}
-	.order-tool {
-	}
-	.filter-tool {
-	}
-}
-.module-content {
-	box-sizing: border-box;
-	flex: 1;
-	overflow-y: hidden;
-	// background: linear-gradient(180deg, #f6f8fd 0%, #f8faff 100%);
-	background: #f6f8fd;
 }
 </style>

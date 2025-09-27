@@ -55,6 +55,9 @@
 					"path": "pages/index/index"
 				},
 				{
+					"path": "pages/ytk/index/detail"
+				},
+				{
 					"path": "pages/trans/index"
 				}
 			]

@@ -3,8 +3,8 @@
 		<view
 			v-for="(item, index) in tabBarList"
 			:key="index"
-			class="tab-bar-item"
-			@click="tabLinkTo(item)"
+			:class="['tab-bar-item', currentTab === item.tab ? 'active' : '']"
+			@click="changeTab(item)"
 		>
 			<image :src="item.src" mode="scaleToFill" />
 			<text class="item-text">{{ item.name }}</text>
@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { setGlobalVarData } from '../../utils/globalVars'
 export default {
 	data() {
 		return {
@@ -21,32 +20,29 @@ export default {
 				{
 					name: '账户管理',
 					src: '../../static/images/tabBar/account.png',
-					url: '/packageCrossBorderE/pages/index/index'
+					tab: 'account'
 				},
 				{
 					name: '交易查询管理',
 					src: '../../static/images/tabBar/trans.png',
-					url: '/packageCrossBorderE/pages/trans/index'
+					tab: 'trans'
 				},
 				{
 					name: '用户中心',
 					src: '../../static/images/tabBar/user.png',
-					url: '/packageCrossBorderE/pages/user/index'
+					tab: 'user'
 				}
 			],
-			currentTabPath: ''
+			currentTab: 'account'
 		}
 	},
-	created() {
-		const routes = getCurrentPages()
-		this.currentTabPath = '/' + routes[routes.length - 1].route // 初始化从路径取值，保证外面访问进来时默认就是访问那个
-		setGlobalVarData('currentTabPath', this.currentTabPath)
-	},
+	created() {},
 	methods: {
-		tabLinkTo({ url }) {
-			if (url === this.currentTabPath) return
-			setGlobalVarData('currentTabPath', url)
-			uni.navigateTo({ url })
+		changeTab({ tab }) {
+			console.log('tab', tab)
+			if (tab === this.currentTabPath) return
+			this.currentTab = tab
+			this.$emit('update-tab', this.currentTab)
 		}
 	}
 }
@@ -55,24 +51,30 @@ export default {
 <style lang="scss" scoped>
 .product-tab-bar {
 	display: flex;
+	align-items: center;
+
 	.tab-bar-item {
 		height: 100rpx;
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		// justify-content: center;
+		justify-content: center;
 		align-items: center;
-		padding-top: 22rpx;
 		image {
-			width: 32rpx;
+			width: 40rpx;
 			height: 40rpx;
 		}
 		.item-text {
 			font-size: 20rpx;
-			// color: #5271ff;
 			color: #969799;
+			height: 28rpx;
 			line-height: 28rpx;
-			margin-block: 4rpx;
+			margin-top: 6rpx;
+		}
+		&.active {
+			.item-text {
+				color: #5271ff;
+			}
 		}
 	}
 }
